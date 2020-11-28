@@ -1,4 +1,4 @@
-//var dates=[];
+var dates=[];
 var endDAtes=[];
 var now;
 
