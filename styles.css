@@ -52,12 +52,15 @@ select {
 }
 
 #pb{
+  display: none;
   width: 25%;
   padding: 5px;
   margin: 5px;
   text-align: center;
-  background-color: rgba(255,255, 255, 0.7);
+  background-color: #ffffffb2;
   position: fixed;
+  bottom: 20px;
+  right: 30px;
 }
 
 #pbTxt{

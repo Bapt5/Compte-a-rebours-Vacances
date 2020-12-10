@@ -7,26 +7,31 @@ var endpoint = ''.concat('https://data.education.gouv.fr/api/records/1.0/search/
 
 var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
-	if (this.readyState == 4 && this.status == 200) {
-		var response = JSON.parse(this.responseText);
-		var len = Object.keys(response["records"]).length;
-		for (let i = 0; i < len; i++) {
-  			if(response["records"][i]["fields"]["description"]=="Vacances de la Toussaint"){
-  				dates[0]=new Date("".concat(response["records"][i]["fields"]["start_date"],"T12:13:00"));
-  				endDAtes[0]=new Date("".concat(response["records"][i]["fields"]["end_date"],"T00:00:00"));
-  			}else if(response["records"][i]["fields"]["description"]=="Vacances de Noël"){
-  				dates[1]=new Date("".concat(response["records"][i]["fields"]["start_date"],"T12:13:00"));
-  				endDAtes[1]=new Date("".concat(response["records"][i]["fields"]["end_date"],"T00:00:00"));
-  			}else if(response["records"][i]["fields"]["description"]=="Vacances d'Hiver"){
-  				dates[2]=new Date("".concat(response["records"][i]["fields"]["start_date"],"T12:13:00"));
-  				endDAtes[2]=new Date("".concat(response["records"][i]["fields"]["end_date"],"T00:00:00"));
-  			}else if(response["records"][i]["fields"]["description"]=="Vacances de Printemps"){
-  				dates[3]=new Date("".concat(response["records"][i]["fields"]["start_date"],"T12:13:00"));
-  				endDAtes[3]=new Date("".concat(response["records"][i]["fields"]["end_date"],"T00:00:00"));
-  			}else if(response["records"][i]["fields"]["description"]=="Vacances d'Été"){
-  				dates[4]=new Date("".concat(response["records"][i]["fields"]["start_date"],"T12:13:00"));
-  				endDAtes[4]=new Date("".concat(response["records"][i]["fields"]["end_date"],"T00:00:00"));
-  			}
+	if (this.readyState == 4) {
+		if(this.status == 200){
+			document.getElementById("pb").style.diplay="none";
+			var response = JSON.parse(this.responseText);
+			var len = Object.keys(response["records"]).length;
+			for (let i = 0; i < len; i++) {
+	  			if(response["records"][i]["fields"]["description"]=="Vacances de la Toussaint"){
+  					dates[0]=new Date("".concat(response["records"][i]["fields"]["start_date"],"T12:13:00"));
+  					endDAtes[0]=new Date("".concat(response["records"][i]["fields"]["end_date"],"T00:00:00"));
+  				}else if(response["records"][i]["fields"]["description"]=="Vacances de Noël"){
+	  				dates[1]=new Date("".concat(response["records"][i]["fields"]["start_date"],"T12:13:00"));
+  					endDAtes[1]=new Date("".concat(response["records"][i]["fields"]["end_date"],"T00:00:00"));
+  				}else if(response["records"][i]["fields"]["description"]=="Vacances d'Hiver"){
+	  				dates[2]=new Date("".concat(response["records"][i]["fields"]["start_date"],"T12:13:00"));
+  					endDAtes[2]=new Date("".concat(response["records"][i]["fields"]["end_date"],"T00:00:00"));
+  				}else if(response["records"][i]["fields"]["description"]=="Vacances de Printemps"){
+	  				dates[3]=new Date("".concat(response["records"][i]["fields"]["start_date"],"T12:13:00"));
+  					endDAtes[3]=new Date("".concat(response["records"][i]["fields"]["end_date"],"T00:00:00"));
+  				}else if(response["records"][i]["fields"]["description"]=="Vacances d'Été"){
+	  				dates[4]=new Date("".concat(response["records"][i]["fields"]["start_date"],"T12:13:00"));
+  					endDAtes[4]=new Date("".concat(response["records"][i]["fields"]["end_date"],"T00:00:00"));
+  				}
+			}
+		}else{
+			document.getElementById("pb").style.diplay="block";
 		}
 	}
 
@@ -46,9 +51,15 @@ var x = setInterval(function() {
 
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var response = JSON.parse(this.responseText);
-			now=new Date(response._metadata.date);
+		if (this.readyState == 4) {
+			if(this.status == 200){
+				document.getElementById("pb").style.diplay="none";
+				var response = JSON.parse(this.responseText);
+				now=new Date(response._metadata.date);
+			}else{
+				document.getElementById("pb").style.diplay="block";
+				now=Date.now();
+			}
 		}
 
 	};
