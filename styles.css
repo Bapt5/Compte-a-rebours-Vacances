@@ -51,6 +51,20 @@ select {
 	padding: 2px 5px;
 }
 
+#pb{
+  width: 25%;
+  padding: 5px;
+  margin: 5px;
+  text-align: center;
+  background-color: rgba(255,255, 255, 0.7);
+  position: fixed;
+}
+
+#pbTxt{
+  font-size: 20px;
+  color:red;
+}
+
 @media screen and(max-width: 900px;){
   body{
     align-items: stretch;
