@@ -1,7 +1,7 @@
+$('#body').css('opacity', 0);
 var dates = [];
 var endDAtes = [];
 var now;
-
 var annee = '2021-2022'
 var endpoint = ''.concat('https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-calendrier-scolaire&q=&facet=description&facet=start_date&facet=end_date&facet=location&facet=zones&facet=annee_scolaire&refine.zones=Zone+C&refine.annee_scolaire=', annee, '&refine.location=Versailles&timezone=Europe%2FParis');
 
@@ -9,7 +9,7 @@ var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
 	if (this.readyState == 4) {
 		if (this.status == 200) {
-			document.getElementById("pb").style.diplay = "none";
+			$('#pb').css('diplay', "none");
 			var response = JSON.parse(this.responseText);
 			var len = Object.keys(response["records"]).length;
 			for (let i = 0; i < len; i++) {
@@ -51,7 +51,7 @@ xhr.onreadystatechange = function() {
 				}
 			}
 		} else {
-			document.getElementById("pb").style.diplay = "block";
+			$('#pb').css('diplay', "block");
 		}
 	}
 
@@ -63,35 +63,51 @@ var i = 0;
 var j = 0;
 
 var x = setInterval(function() {
-	if (innerHeight > 800) {
-		document.body.style.height = "".concat(innerHeight, "px");
-	}
 
-	var endpoint = 'https://api-ratp.pierre-grimaud.fr/v4/traffic';
-
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if (this.readyState == 4) {
-			if (this.status == 200) {
-				document.getElementById("pb").style.diplay = "none";
-				var response = JSON.parse(this.responseText);
-				now = response._metadata.date;
+	$.ajax({
+		url: 'https://api-ratp.pierre-grimaud.fr/v4/traffic',
+		dataType: 'json',
+		data: {},
+		success: function(donnee) {
+			$.map(donnee, function() {
+				now = donnee._metadata.date;
 				now = new Date(now.substring(0, now.length - 6));
-			} else {
-				document.getElementById("pb").style.diplay = "block";
-				now = Date.now();
-			}
+			});
 		}
-
-	};
-	xhr.open('GET', endpoint, true);
-	xhr.send();
+	});
+	//
+	//
+	//
+	//
+	//
+	// var endpoint = 'https://api-ratp.pierre-grimaud.fr/v4/traffic';
+	//
+	// var xhr = new XMLHttpRequest();
+	// xhr.onreadystatechange = function() {
+	// 	if (this.readyState == 4) {
+	// 		if (this.status == 200) {
+	// 			$('#pb').css('diplay', "none");
+	// 			var response = JSON.parse(this.responseText);
+	// 			now = response._metadata.date;
+	// 			now = new Date(now.substring(0, now.length - 6));
+	// 		} else {
+	// 			$('#pb').css('diplay', "block");
+	// 			now = Date.now();
+	// 		}
+	// 	}
+	//
+	// };
+	// xhr.open('GET', endpoint, true);
+	// xhr.send();
 
 	var vacation = dates[i];
-	console.log(vacation)
 	var endVacation = endDAtes[j];
 	var distance = vacation - now;
-	var unit = document.getElementById("unit").value;
+	if (distance > 0) {
+		$('#body').css('opacity', 1);
+	}
+
+	var unit = $('#unit').val();
 	if (unit == "week") {
 		var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
 		var days = Math.floor(distance % (1000 * 60 * 60 * 24 * 7) / (1000 * 60 * 60 * 24));
@@ -99,15 +115,20 @@ var x = setInterval(function() {
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		if (weeks == 0) {
-			document.getElementById("week").disabled = true;
-			document.getElementById("unit").value = "day";
+			$("#week").disabled = true;
+			$("#unit").val("day");
 		} else {
-			document.getElementById("week").disabled = false;
-			document.getElementById("day").disabled = false;
-			document.getElementById("hour").disabled = false;
-			document.getElementById("minute").disabled = false;
+			$("#week").disabled = false;
+			$("#day").disabled = false;
+			$("#hour").disabled = false;
+			$("#minute").disabled = false;
 		}
-		document.getElementById("clock").innerHTML = weeks + " semaines, " + days + " jours, " + hours + " heures, " + minutes + " minutes, " + seconds + " secondes";
+		if (window.screen.width > window.screen.height) {
+			$("#clock").text(weeks + " semaines, " + days + " jours, " + hours + " h, " + minutes + " min, " + seconds + " s");
+		}
+		else {
+			$("#clock").text(weeks + " sem, " + days + " j, " + hours + " h, " + minutes + " min, " + seconds + " s");
+		}
 	} else if (unit == "day") {
 		var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
 		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -115,15 +136,20 @@ var x = setInterval(function() {
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		if (weeks == 0 && days == 0) {
-			document.getElementById("week").disabled = true;
-			document.getElementById("day").disabled = true;
-			document.getElementById("unit").value = "hour";
+			$("#week").disabled = true;
+			$("#day").disabled = true;
+			$("#unit").val("hours");
 		} else {
-			document.getElementById("day").disabled = false;
-			document.getElementById("hour").disabled = false;
-			document.getElementById("minute").disabled = false;
+			$("#day").disabled = false;
+			$("#hour").disabled = false;
+			$("#minute").disabled = false;
 		}
-		document.getElementById("clock").innerHTML = days + " jours, " + hours + " heures, " + minutes + " minutes, " + seconds + " secondes ";
+		if (window.screen.width > window.screen.height) {
+			$("#clock").text(days + " jours, " + hours + " h, " + minutes + " min, " + seconds + " s");
+		}
+		else {
+			$("#clock").text(days + " j, " + hours + " h, " + minutes + " min, " + seconds + " s");
+		}
 	} else if (unit == "hour") {
 		var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
 		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -131,15 +157,20 @@ var x = setInterval(function() {
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		if (weeks == 0 && days == 0 && hours == 0) {
-			document.getElementById("week").disabled = true;
-			document.getElementById("day").disabled = true;
-			document.getElementById("hour").disabled = true;
-			document.getElementById("unit").value = "minute";
+			$("#week").disabled = true;
+			$("#day").disabled = true;
+			$("#hour").disabled = true;
+			$("#unit").val("minute");
 		} else {
-			document.getElementById("hour").disabled = false;
-			document.getElementById("minute").disabled = false;
+			$("#hour").disabled = false;
+			$("#minute").disabled = false;
 		}
-		document.getElementById("clock").innerHTML = hours + " heures, " + minutes + " minutes, " + seconds + " secondes ";
+		if (window.screen.width > window.screen.height) {
+			$("#clock").text(hours + " h, " + minutes + " min, " + seconds + " s");
+		}
+		else {
+			$("#clock").text(hours + " h, " + minutes + " min, " + seconds + " s");
+		}
 	} else if (unit == "minute") {
 		var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
 		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -147,27 +178,34 @@ var x = setInterval(function() {
 		var minutes = Math.floor(distance / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		if (weeks == 0 && days == 0 && hours == 0 && minutes == 0) {
-			document.getElementById("week").disabled = true;
-			document.getElementById("day").disabled = true;
-			document.getElementById("hour").disabled = true;
-			document.getElementById("minute").disabled = true;
-			document.getElementById("unit").value = "second";
+			$("#week").disabled = true;
+			$("#day").disabled = true;
+			$("#hour").disabled = true;
+			$("#minute").disabled = true;
+			$("#unit").val("second");
 		} else {
-			document.getElementById("minute").disabled = false;
+			$("#minute").disabled = false;
 		}
-		document.getElementById("clock").innerHTML = minutes + " minutes, " + seconds + " secondes ";
+		$("#clock").text(Intl.NumberFormat().format(minutes) + " min, " + seconds + " s ");
 	} else {
 		var seconds = Math.floor(distance / 1000);
-		document.getElementById("clock").innerHTML = seconds + " secondes ";
+		$("#clock").text(Intl.NumberFormat().format(seconds) + " s ");
 	}
 
 	if (distance <= 0 && endVacation - now >= 0) {
 		i++;
-		document.getElementById("vacation").innerHTML = "🎉C'est les vacances🎉"
+		if (window.screen.width > window.screen.height) {
+			$("#vacation").text("🎉C'est les vacances🎉<br>");
+		}
+		else {
+			$("#vacation").text("<br>🎉C'est les vacances🎉<br><br>");
+		}
+		start();
+		stop();
 	}
 	if (distance >= 0 && endVacation - now <= 0) {
 		j++;
-		document.getElementById("vacation").innerHTML = "";
+		$("#vacation").text("");
 	}
 	if (distance <= 0 && endVacation - now <= 0) {
 		j++;
@@ -176,64 +214,64 @@ var x = setInterval(function() {
 
 	if (j == 0) {
 		if (window.screen.width > window.screen.height) {
-			document.body.style.backgroundImage = "url(images/halloween.jpg)";
+			$("#body").css('background-image', "url(images/halloween.jpg)");
 		} else {
-			document.body.style.backgroundImage = "url(images/halloweenTel.jpg)";
+			$("#body").css('background-image', "url(images/halloweenTel.jpg)");
 		}
-		document.body.style.color = "white";
-		document.getElementById("unitLabel").style.color = "white";
+		$("#body").css('color', "white");
+		$("#unitLabel").css('color', "white");
 	}
 
 	if (j == 1) {
 		if (window.screen.width > window.screen.height) {
-			document.body.style.backgroundImage = "url(images/noel.jpg)";
+			$("#body").css('background-image', "url(images/noel.jpg)");
 		} else {
-			document.body.style.backgroundImage = "url(images/noelTel.jpg)";
+			$("#body").css('background-image', "url(images/noelTel.jpg)");
 		}
-		document.body.style.color = "white";
-		document.getElementById("unitLabel").style.color = "white";
+		$("#body").css('color', "white");
+		$("#unitLabel").css('color', "white");
 	}
 
 	if (j == 2) {
 		if (window.screen.width > window.screen.height) {
-			document.body.style.backgroundImage = "url(images/ski.jpg)";
+			$("#body").css('background-image', "url(images/ski.jpg)");
 		} else {
-			document.body.style.backgroundImage = "url(images/skiTel.jpg)";
+			$("#body").css('background-image', "url(images/skiTel.jpg)");
 		}
-		document.body.style.color = "yellow";
-		document.getElementById("unitLabel").style.color = "yellow";
+		$("#body").css('color', "yellow");
+		$("#unitLabel").css('color', "yellow");
 	}
 
 	if (j == 3) {
 		if (window.screen.width > window.screen.height) {
-			document.body.style.backgroundImage = "url(images/paques.jpg)";
+			$("#body").css('background-image', "url(images/paques.jpg)");
 		} else {
-			document.body.style.backgroundImage = "url(images/paquesTel.jpg)";
+			$("#body").css('background-image', "url(images/paquesTel.jpg)");
 		}
-		document.body.style.color = "yellow";
-		document.getElementById("unitLabel").style.color = "yellow";
+		$("#body").css('color', "yellow");
+		$("#unitLabel").css('color', "yellow");
 	}
 
 	if (j == 4) {
 		if (window.screen.width > window.screen.height) {
-			document.body.style.backgroundImage = "url(images/vacances.jpg)";
+			$("#body").css('background-image', "url(images/vacances.jpg)");
 		} else {
-			document.body.style.backgroundImage = "url(images/vacancesTel.jpg)";
+			$("#body").css('background-image', "url(images/vacancesTel.jpg)");
 		}
-		document.body.style.color = "black";
-		document.getElementById("unitLabel").style.color = "white";
+		$("#body").css('color', "black");
+		$("#unitLabel").css('color', "white");
 	}
-
-	if (window.screen.width > window.screen.height) {
-		document.getElementById("h1").style.fontSize = "50px";
-		document.getElementById("vacation").style.fontSize = "70px";
-		document.getElementById("p").style.fontSize = "40px";
-		document.getElementById("clock").style.fontSize = "40px";
-	} else {
-		document.getElementById("h1").style.fontSize = "90px";
-		document.getElementById("vacation").style.fontSize = "100px";
-		document.getElementById("p").style.fontSize = "70px";
-		document.getElementById("clock").style.fontSize = "70px";
-	}
-
 }, 50)
+const start = () => {
+	setTimeout(function() {
+		confetti.start()
+	}, 1000); // 1000 is time that after 1 second start the confetti ( 1000 = 1 sec)
+};
+
+//  for stopping the confetti
+
+const stop = () => {
+	setTimeout(function() {
+		confetti.stop()
+	}, 5000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
+};

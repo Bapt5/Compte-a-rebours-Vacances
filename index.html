@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src ="main.js" async></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGKJ96PM5L"></script>
     <script>
@@ -10,21 +12,26 @@
 
       gtag('config', 'G-XGKJ96PM5L');
     </script>
-    <script src ="main.js" async></script>
+    <script src="confetti.js"></script>
+    <link rel="icon" href="images/favicon.ico" />
     <meta name="google-site-verification" content="yi6Tvn8jBa54WSyYbR88qzhnpizXQqrpjneWiXNaQdw" />
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href ="styles.css" rel="stylesheet" type="text/css">
     <title>Compte à rebours avant les vacances</title>
     <link href="https://fonts.googleapis.com/css?family=Cutive&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body id="body">
     <div>
-      <center><h1 id="h1">Compte à rebours avant les vacances</h1></center>
-      <h2 id="vacation"></h2>
+      <p id="h1">Compte à rebours avant les vacances</p>
+      <br />
+      <p id="vacation"></p>
       <p id="p">Les prochaines vacances sont dans : </p>
+      <br /><br />
       <p id="clock"></p>
-    <br>
-      <div>
+      <br />
+      <br>
+      <div class="label_select">
         <label for="unit" id="unitLabel">Choisir l'unité : </label>
         <select name="unit" id="unit">
             <option value="week" id="week" selected>Semaines</option>
@@ -40,8 +47,8 @@
       <p id="pbTxt">Erreur de connexion! <br>Veuillez vérifiez votre connexion au réseau !!</p>
     </div>
     <br>
+    <!-- <br>
     <br>
-    <br>
-    <div id="lien"><a href="https://index-sites-internet.netlify.app/" >Pour decouvrir tous nos sites web</a></div>
+    <div id="lien"><a href="https://index-sites-internet.netlify.app/" >Pour decouvrir tous nos sites web</a></div> -->
   </body>
 </html>
