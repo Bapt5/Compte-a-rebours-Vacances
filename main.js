@@ -115,13 +115,13 @@ var x = setInterval(function() {
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		if (weeks == 0) {
-			$("#week").disabled = true;
-			$("#unit").val("day");
+			$("#week").prop('disabled', true);
+			$("#unit").val("days");
 		} else {
-			$("#week").disabled = false;
-			$("#day").disabled = false;
-			$("#hour").disabled = false;
-			$("#minute").disabled = false;
+			$("#week").prop('disabled', false);
+			$("#day").prop('disabled', false);
+			$("#hour").prop('disabled', false);
+			$("#minute").prop('disabled', false);
 		}
 		if (window.screen.width > window.screen.height) {
 			$("#clock").text(weeks + " semaines, " + days + " jours, " + hours + " h, " + minutes + " min, " + seconds + " s");
@@ -136,13 +136,13 @@ var x = setInterval(function() {
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		if (weeks == 0 && days == 0) {
-			$("#week").disabled = true;
-			$("#day").disabled = true;
+			$("#week").prop('disabled', true);
+			$("#day").prop('disabled', true);
 			$("#unit").val("hours");
 		} else {
-			$("#day").disabled = false;
-			$("#hour").disabled = false;
-			$("#minute").disabled = false;
+			$("#day").prop('disabled', false);
+			$("#hour").prop('disabled', false);
+			$("#minute").prop('disabled', false);
 		}
 		if (window.screen.width > window.screen.height) {
 			$("#clock").text(days + " jours, " + hours + " h, " + minutes + " min, " + seconds + " s");
@@ -157,13 +157,13 @@ var x = setInterval(function() {
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		if (weeks == 0 && days == 0 && hours == 0) {
-			$("#week").disabled = true;
-			$("#day").disabled = true;
-			$("#hour").disabled = true;
+			$("#week").prop('disabled', true);
+			$("#day").prop('disabled', true);
+			$("#hour").prop('disabled', true);
 			$("#unit").val("minute");
 		} else {
-			$("#hour").disabled = false;
-			$("#minute").disabled = false;
+			$("#hour").prop('disabled', false);
+			$("#minute").prop('disabled', false);
 		}
 		if (window.screen.width > window.screen.height) {
 			$("#clock").text(hours + " h, " + minutes + " min, " + seconds + " s");
@@ -178,13 +178,13 @@ var x = setInterval(function() {
 		var minutes = Math.floor(distance / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		if (weeks == 0 && days == 0 && hours == 0 && minutes == 0) {
-			$("#week").disabled = true;
-			$("#day").disabled = true;
-			$("#hour").disabled = true;
-			$("#minute").disabled = true;
+			$("#week").prop('disabled', true);
+			$("#day").prop('disabled', true);
+			$("#hour").prop('disabled', true);
+			$("#minute").prop('disabled', true);
 			$("#unit").val("second");
 		} else {
-			$("#minute").disabled = false;
+			$("#minute").prop('disabled', false);
 		}
 		$("#clock").text(Intl.NumberFormat().format(minutes) + " min, " + seconds + " s ");
 	} else {
