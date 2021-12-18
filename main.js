@@ -106,7 +106,7 @@ var x = setInterval(function() {
 	if (distance > 0) {
 		$('#body').css('opacity', 1);
 	}
-
+	$('#progress').val((((vacation - endVacation) - distance) / (vacation - endVacation)) * 100);
 	var unit = $('#unit').val();
 	if (unit == "week") {
 		var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
@@ -193,6 +193,7 @@ var x = setInterval(function() {
 	}
 	if (distance <= 0 && endVacation - now >= 0) {
 		i++;
+		$('#progress').css('display', 'none')
 		if (window.screen.width > window.screen.height) {
 			$("#vacation").html("🎉C'est les vacances🎉<br>");
 		}
@@ -204,7 +205,8 @@ var x = setInterval(function() {
 	}
 	if (distance >= 0 && endVacation - now <= 0) {
 		j++;
-		$("#vacation").text("");
+		$("#vacation").html("");
+		$('#progress').css('display', 'block')
 	}
 	if (distance <= 0 && endVacation - now <= 0) {
 		j++;

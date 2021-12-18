@@ -68,6 +68,11 @@ div{
   body{
     margin-top:7%;
   }
+  #progress{
+    height: 2rem;
+    width: 90%;
+    margin-top: 30%;
+  }
 }
 /* Pour ordinateur */
 @media screen and (min-width:1023px){
@@ -99,5 +104,9 @@ div{
     text-align: center;
     font-size: 3rem;
     margin:0;
+  }
+  #progress{
+    height: 2rem;
+    width: 90%;
   }
 }
