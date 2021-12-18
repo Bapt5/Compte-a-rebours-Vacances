@@ -19,35 +19,35 @@ xhr.onreadystatechange = function() {
 					dates[0] = new Date(dates[0] + "T12:13:00");
 					endDAtes[0] = response["records"][i]["fields"]["start_date"];
 					endDAtes[0] = endDAtes[0].substring(0, endDAtes[0].length - 15);
-					endDAtes[0] = new Date(endDAtes[0] + "T00:00:00");
+					endDAtes[0] = new Date(endDAtes[0] + "T12:13:00");
 				} else if (response["records"][i]["fields"]["description"] == "Vacances de Noël") {
 					dates[1] = response["records"][i]["fields"]["start_date"];
 					dates[1] = dates[1].substring(0, dates[1].length - 15);
 					dates[1] = new Date(dates[1] + "T12:13:00");
 					endDAtes[1] = response["records"][i]["fields"]["start_date"];
 					endDAtes[1] = endDAtes[1].substring(0, endDAtes[1].length - 15);
-					endDAtes[1] = new Date(endDAtes[1] + "T00:00:00");
+					endDAtes[1] = new Date(endDAtes[1] + "T12:13:00");
 				} else if (response["records"][i]["fields"]["description"] == "Vacances d'Hiver") {
 					dates[2] = response["records"][i]["fields"]["start_date"];
 					dates[2] = dates[2].substring(0, dates[2].length - 15);
 					dates[2] = new Date(dates[2] + "T12:13:00");
 					endDAtes[2] = response["records"][i]["fields"]["start_date"];
 					endDAtes[2] = endDAtes[2].substring(0, endDAtes[2].length - 15);
-					endDAtes[2] = new Date(endDAtes[2] + "T00:00:00");
+					endDAtes[2] = new Date(endDAtes[2] + "T12:13:00");
 				} else if (response["records"][i]["fields"]["description"] == "Vacances de Printemps") {
 					dates[3] = response["records"][i]["fields"]["start_date"];
 					dates[3] = dates[3].substring(0, dates[3].length - 15);
 					dates[3] = new Date(dates[3] + "T12:13:00");
 					endDAtes[3] = response["records"][i]["fields"]["start_date"];
 					endDAtes[3] = endDAtes[3].substring(0, endDAtes[3].length - 15);
-					endDAtes[3] = new Date(endDAtes[3] + "T00:00:00");
+					endDAtes[3] = new Date(endDAtes[3] + "T12:13:00");
 				} else if (response["records"][i]["fields"]["description"] == "Vacances d'Été") {
 					dates[4] = response["records"][i]["fields"]["start_date"];
 					dates[4] = dates[4].substring(0, dates[4].length - 15);
 					dates[4] = new Date(dates[4] + "T12:13:00");
 					endDAtes[4] = response["records"][i]["fields"]["start_date"];
 					endDAtes[4] = endDAtes[4].substring(0, endDAtes[4].length - 15);
-					endDAtes[4] = new Date(endDAtes[4] + "T00:00:00");
+					endDAtes[4] = new Date(endDAtes[4] + "T12:13:00");
 				}
 			}
 		} else {
