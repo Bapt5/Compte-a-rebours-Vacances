@@ -106,7 +106,13 @@ var x = setInterval(function() {
 	if (distance > 0) {
 		$('#body').css('opacity', 1);
 	}
-	$('#progress').val((((vacation - endVacation) - distance) / (vacation - endVacation)) * 100);
+	if (j == 0) {
+		var finAncienneVac = vacation - endDAtes[4]
+	}
+	else {
+		var finAncienneVac = vacation - endDAtes[j - 1]
+	}
+	$('#progress').val(((finAncienneVac - distance) * 100) / (finAncienneVac));
 	var unit = $('#unit').val();
 	if (unit == "week") {
 		var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
