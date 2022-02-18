@@ -208,6 +208,11 @@ var x = setInterval(function() {
 		}
 		start();
 		stop();
+		$("#week").prop('disabled', false);
+		$("#day").prop('disabled', false);
+		$("#hour").prop('disabled', false);
+		$("#minute").prop('disabled', false);
+		$("#unit").val("week");
 	}
 	if (distance >= 0 && endVacation - now <= 0) {
 		j++;
