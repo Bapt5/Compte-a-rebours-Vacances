@@ -1,63 +1,245 @@
+var unit = "week";
+
+var zone = "C";
+$('#zone-select').val(zone);
+
+var vacDay = "dS";
+$('#dayVac-select').val(vacDay);
+
+var heurVac = "00:00";
+$('#time-Vac').val(heurVac);
+
+var departZone = { 1: "A", 2: "B", 3: "A", 4: "B", 5: "B", 6: "B", 7: "A", 8: "B", 9: "C", 10: "B", 11: "C", 12: "C", 13: "B", 14: "B", 15: "A", 16: "A", 17: "A", 18: "B", 19: "A", 21: "A", 22: "B", 23: "A", 24: "A", 25: "A", 26: "A", 27: "B", 28: "B", 29: "B", 30: "C", 31: "C", 32: "C", 33: "A", 34: "C", 35: "B", 36: "B", 37: "B", 38: "A", 39: "A", 40: "A", 41: "B", 42: "A", 43: "A", 44: "B", 45: "B", 46: "C", 47: "A", 48: "C", 49: "B", 50: "B", 51: "B", 52: "B", 53: "B", 54: "B", 55: "B", 56: "B", 57: "B", 58: "A", 59: "B", 60: "B", 61: "B", 62: "B", 63: "A", 64: "A", 65: "C", 66: "C", 67: "B", 68: "B", 69: "A", 70: "A", 71: "A", 72: "B", 73: "A", 74: "A", 75: "C", 76: "B", 77: "C", 78: "C", 79: "A", 80: "B", 81: "C", 82: "C", 83: "B", 84: "B", 85: "B", 86: "A", 87: "A", 88: "B", 89: "A", 90: "A", 91: "C", 92: "C", 93: "C", 94: "C", 95: "C" };
+
+var jqxhr = jQuery.getJSON('data.json', function() {
+	console.log('success');
+})
+	.done(function() {
+		console.log('second success');
+	})
+	.fail(function() {
+		console.log('error');
+	});
+
+
+function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
+	var R = 6371; // Radius of the earth in km
+	var dLat = deg2rad(lat2 - lat1);  // deg2rad below
+	var dLon = deg2rad(lng2 - lng1);
+	var a =
+		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+		Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+		Math.sin(dLon / 2) * Math.sin(dLon / 2)
+		;
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	var d = R * c; // Distance in km
+	return d;
+}
+
+
+function test() {
+	var tabsNewAnim = $('#navbarSupportedContent');
+	var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+	var activeItemNewAnim = tabsNewAnim.find('.active');
+	var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+	var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+	var itemPosNewAnimTop = activeItemNewAnim.position();
+	var itemPosNewAnimLeft = activeItemNewAnim.position();
+	$(".hori-selector").css({
+		"top": itemPosNewAnimTop.top + "px",
+		"left": itemPosNewAnimLeft.left + "px",
+		"height": activeWidthNewAnimHeight + "px",
+		"width": activeWidthNewAnimWidth + "px"
+	});
+	$("#navbarSupportedContent").on("click", "li", function(e) {
+		if (this.id == "Setting") {
+			$('#zone-select').val(zone);
+			$('#dayVac-select').val(vacDay);
+			$('#time-Vac').val(heurVac);
+			$("#myModal").css("display", "block");
+		}
+		else {
+			unit = this.id;
+		}
+		$('#navbarSupportedContent ul li').removeClass("active");
+		$(this).addClass('active');
+		var activeWidthNewAnimHeight = $(this).innerHeight();
+		var activeWidthNewAnimWidth = $(this).innerWidth();
+		var itemPosNewAnimTop = $(this).position();
+		var itemPosNewAnimLeft = $(this).position();
+		$(".hori-selector").css({
+			"top": itemPosNewAnimTop.top + "px",
+			"left": itemPosNewAnimLeft.left + "px",
+			"height": activeWidthNewAnimHeight + "px",
+			"width": activeWidthNewAnimWidth + "px"
+		});
+	});
+	$('#submit').on("click", function() {
+		zone = $('#zone-select').val();
+		vacDay = $('#dayVac-select').val();
+		heurVac = $('#time-Vac').val();
+		localStorage.setItem('zone', zone);
+		localStorage.setItem('vacDay', vacDay);
+		localStorage.setItem('heurVac', heurVac);
+		dateVacance();
+		$("#myModal").css("display", "none");
+		$('#week').click();
+	});
+	$(".close").on("click", function() {
+		$("#myModal").css("display", "none");
+		$('#week').click();
+	});
+	$(window).on("click", function(event) {
+		if (event.target.id == "myModal") {
+			$("#myModal").css("display", "none");
+			$('#week').click();
+		}
+	});
+}
+$(document).ready(function() {
+	setTimeout(function() { test(); });
+});
+$(window).on('resize', function() {
+	setTimeout(function() { test(); }, 500);
+});
+$(".navbar-toggler").click(function() {
+	$(".navbar-collapse").slideToggle(300);
+	setTimeout(function() { test(); });
+});
+
+
+
+// --------------add active class-on another-page move----------
+jQuery(document).ready(function($) {
+	if (localStorage.length == 0) {
+		zone = "C";
+		vacDay = "dS";
+		heurVac = "00:00";
+	}
+	else {
+		zone = localStorage.getItem('zone');
+		vacDay = localStorage.getItem('vacDay');
+		heurVac = localStorage.getItem('heurVac');
+	}
+	dateVacance()
+	$('#zone-select').val(zone);
+	$('#dayVac-select').val(vacDay);
+	$('#time-Vac').val(heurVac);
+	if ("geolocation" in navigator) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			console.log("Found your location \nLat : " + position.coords.latitude + " \nLang :" + position.coords.longitude);
+			var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + '%2C' + position.coords.longitude + '&language=fr&key=AIzaSyDfvhc13Zir5EQC-Zlwt5UH6rymm5TY4s0';
+			dateVacance()
+		});
+	} else {
+		console.log("Browser doesn't support geolocation!");
+	}
+
+
+	// Get current path and find target link
+	var path = window.location.pathname.split("/").pop();
+
+	// Account for home page with empty path
+	if (path == '') {
+		path = 'index.html';
+	}
+
+	var target = $('#navbarSupportedContent ul li a[href="' + path + '"]');
+	// Add active class to target link
+	target.parent().addClass('active');
+});
+
+
+
+
 $('#body').css('opacity', 0);
 var dates = [];
 var endDAtes = [];
+var premierCercleSec = 0;
+var deuxiemeCercleSec = 0;
+var premierCercleMin = 0;
+var deuxiemeCercleMin = 0;
+var premierCercleHeure = 0;
+var deuxiemeCercleHeure = 0;
+var premierCercleDay = 0;
+var deuxiemeCercleDay = 0;
+var premierCercleWeek = 0;
+var deuxiemeCercleWeek = 0;
+
 var now;
 var annee = '2021-2022'
-var endpoint = ''.concat('https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-calendrier-scolaire&q=&facet=description&facet=start_date&facet=end_date&facet=location&facet=zones&facet=annee_scolaire&refine.zones=Zone+C&refine.annee_scolaire=', annee, '&refine.location=Versailles&timezone=Europe%2FParis');
+var endpoint = ''.concat('https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-calendrier-scolaire&q=&facet=description&facet=start_date&facet=end_date&facet=location&facet=zones&facet=annee_scolaire&refine.zones=Zone+', zone, '&refine.annee_scolaire=', annee, '&refine.location=Versailles&timezone=Europe%2FParis');
 
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function() {
-	if (this.readyState == 4) {
-		if (this.status == 200) {
-			$('#pb').css('diplay', "none");
-			var response = JSON.parse(this.responseText);
-			var len = Object.keys(response["records"]).length;
-			for (let i = 0; i < len; i++) {
-				if (response["records"][i]["fields"]["description"] == "Vacances de la Toussaint") {
-					dates[0] = response["records"][i]["fields"]["start_date"];
-					dates[0] = dates[0].substring(0, dates[0].length - 15);
-					dates[0] = new Date(dates[0] + "T12:13:00");
-					endDAtes[0] = response["records"][i]["fields"]["end_date"];
-					endDAtes[0] = endDAtes[0].substring(0, endDAtes[0].length - 15);
-					endDAtes[0] = new Date(endDAtes[0] + "T00:00:00");
-				} else if (response["records"][i]["fields"]["description"] == "Vacances de Noël") {
-					dates[1] = response["records"][i]["fields"]["start_date"];
-					dates[1] = dates[1].substring(0, dates[1].length - 15);
-					dates[1] = new Date(dates[1] + "T12:13:00");
-					endDAtes[1] = response["records"][i]["fields"]["end_date"];
-					endDAtes[1] = endDAtes[1].substring(0, endDAtes[1].length - 15);
-					endDAtes[1] = new Date(endDAtes[1] + "T00:00:00");
-				} else if (response["records"][i]["fields"]["description"] == "Vacances d'Hiver") {
-					dates[2] = response["records"][i]["fields"]["start_date"];
-					dates[2] = dates[2].substring(0, dates[2].length - 15);
-					dates[2] = new Date(dates[2] + "T12:13:00");
-					endDAtes[2] = response["records"][i]["fields"]["end_date"];
-					endDAtes[2] = endDAtes[2].substring(0, endDAtes[2].length - 15);
-					endDAtes[2] = new Date(endDAtes[2] + "T00:00:00");
-				} else if (response["records"][i]["fields"]["description"] == "Vacances de Printemps") {
-					dates[3] = response["records"][i]["fields"]["start_date"];
-					dates[3] = dates[3].substring(0, dates[3].length - 15);
-					dates[3] = new Date(dates[3] + "T12:13:00");
-					endDAtes[3] = response["records"][i]["fields"]["end_date"];
-					endDAtes[3] = endDAtes[3].substring(0, endDAtes[3].length - 15);
-					endDAtes[3] = new Date(endDAtes[3] + "T00:00:00");
-				} else if (response["records"][i]["fields"]["description"] == "Vacances d'Été") {
-					dates[4] = response["records"][i]["fields"]["start_date"];
-					dates[4] = dates[4].substring(0, dates[4].length - 15);
-					dates[4] = new Date(dates[4] + "T12:13:00");
-					endDAtes[4] = response["records"][i]["fields"]["end_date"];
-					endDAtes[4] = endDAtes[4].substring(0, endDAtes[4].length - 15);
-					endDAtes[4] = new Date(endDAtes[4] + "T00:00:00");
+function dateVacance() {
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (this.readyState == 4) {
+			if (this.status == 200) {
+				$('#pb').css('diplay', "none");
+				var response = JSON.parse(this.responseText);
+				var len = Object.keys(response["records"]).length;
+				for (let i = 0; i < len; i++) {
+					if (response["records"][i]["fields"]["description"] == "Vacances de la Toussaint") {
+						dates[0] = response["records"][i]["fields"]["start_date"];
+						dates[0] = dates[0].substring(0, dates[0].length - 15);
+						dates[0] = new Date(dates[0] + "T" + heurVac + ":00");
+						if (vacDay == "dV") {
+							dates[0].setDate(dates[0].getDate() - 1);
+						}
+						endDAtes[0] = response["records"][i]["fields"]["end_date"];
+						endDAtes[0] = endDAtes[0].substring(0, endDAtes[0].length - 15);
+						endDAtes[0] = new Date(endDAtes[0] + "T00:00:00");
+					} else if (response["records"][i]["fields"]["description"] == "Vacances de Noël") {
+						dates[1] = response["records"][i]["fields"]["start_date"];
+						dates[1] = dates[1].substring(0, dates[1].length - 15);
+						dates[1] = new Date(dates[1] + "T" + heurVac + ":00");
+						if (vacDay == "dV") {
+							dates[1].setDate(dates[1].getDate() - 1);
+						}
+						endDAtes[1] = response["records"][i]["fields"]["end_date"];
+						endDAtes[1] = endDAtes[1].substring(0, endDAtes[1].length - 15);
+						endDAtes[1] = new Date(endDAtes[1] + "T00:00:00");
+					} else if (response["records"][i]["fields"]["description"] == "Vacances d'Hiver") {
+						dates[2] = response["records"][i]["fields"]["start_date"];
+						dates[2] = dates[2].substring(0, dates[2].length - 15);
+						dates[2] = new Date(dates[2] + "T" + heurVac + ":00");
+						if (vacDay == "dV") {
+							dates[2].setDate(dates[2].getDate() - 1);
+						}
+						endDAtes[2] = response["records"][i]["fields"]["end_date"];
+						endDAtes[2] = endDAtes[2].substring(0, endDAtes[2].length - 15);
+						endDAtes[2] = new Date(endDAtes[2] + "T00:00:00");
+					} else if (response["records"][i]["fields"]["description"] == "Vacances de Printemps") {
+						dates[3] = response["records"][i]["fields"]["start_date"];
+						dates[3] = dates[3].substring(0, dates[3].length - 15);
+						dates[3] = new Date(dates[3] + "T" + heurVac + ":00");
+						if (vacDay == "dV") {
+							dates[3].setDate(dates[3].getDate() - 1);
+						}
+						endDAtes[3] = response["records"][i]["fields"]["end_date"];
+						endDAtes[3] = endDAtes[3].substring(0, endDAtes[3].length - 15);
+						endDAtes[3] = new Date(endDAtes[3] + "T00:00:00");
+					} else if (response["records"][i]["fields"]["description"] == "Vacances d'Été") {
+						dates[4] = response["records"][i]["fields"]["start_date"];
+						dates[4] = dates[4].substring(0, dates[4].length - 15);
+						dates[4] = new Date(dates[4] + "T" + heurVac + ":00");
+						if (vacDay == "dV") {
+							dates[4].setDate(dates[4].getDate() - 1);
+						}
+						endDAtes[4] = response["records"][i]["fields"]["end_date"];
+						endDAtes[4] = endDAtes[4].substring(0, endDAtes[4].length - 15);
+						endDAtes[4] = new Date(endDAtes[4] + "T00:00:00");
+					}
 				}
+			} else {
+				$('#pb').css('diplay', "block");
 			}
-		} else {
-			$('#pb').css('diplay', "block");
 		}
-	}
 
-};
-xhr.open('GET', endpoint, true);
-xhr.send();
+	};
+	xhr.open('GET', endpoint, true);
+	xhr.send();
+}
 
 var i = 0;
 var j = 0;
@@ -75,30 +257,6 @@ var x = setInterval(function() {
 			});
 		}
 	});
-	//
-	//
-	//
-	//
-	//
-	// var endpoint = 'https://api-ratp.pierre-grimaud.fr/v4/traffic';
-	//
-	// var xhr = new XMLHttpRequest();
-	// xhr.onreadystatechange = function() {
-	// 	if (this.readyState == 4) {
-	// 		if (this.status == 200) {
-	// 			$('#pb').css('diplay', "none");
-	// 			var response = JSON.parse(this.responseText);
-	// 			now = response._metadata.date;
-	// 			now = new Date(now.substring(0, now.length - 6));
-	// 		} else {
-	// 			$('#pb').css('diplay', "block");
-	// 			now = Date.now();
-	// 		}
-	// 	}
-	//
-	// };
-	// xhr.open('GET', endpoint, true);
-	// xhr.send();
 
 	var vacation = dates[i];
 	var endVacation = endDAtes[j];
@@ -112,14 +270,65 @@ var x = setInterval(function() {
 	else {
 		var finAncienneVac = vacation - endDAtes[j - 1]
 	}
-	$('#progress').val(((finAncienneVac - distance) * 100) / (finAncienneVac));
-	var unit = $('#unit').val();
+	nbre_semaine = Math.round((vacation - endDAtes[j - 1]) / (1000 * 60 * 60 * 24 * 7));
+	nbre_jours = Math.round((vacation - endDAtes[j - 1]) / (1000 * 60 * 60 * 24));
+	nbre_heure = Math.round((vacation - endDAtes[j - 1]) / (1000 * 60 * 60));
+	nbre_minute = Math.round((vacation - endDAtes[j - 1]) / (1000 * 60));
+	nbre_seconde = Math.round((vacation - endDAtes[j - 1]) / 1000);
+	// var unit = $('#unit').val();
 	if (unit == "week") {
+		$('#secondsTime').css('fontSize', "25px");
+		$('#weeks').show();
+		$('#days').show();
+		$('#hours').show();
+		$('#minutes').show();
+		$('#seconds').show();
 		var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
 		var days = Math.floor(distance % (1000 * 60 * 60 * 24 * 7) / (1000 * 60 * 60 * 24));
 		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		if (seconds <= 30) {
+			premierCercleSec = (seconds * 180) / 30;
+			deuxiemeCercleSec = 0;
+		}
+		if (seconds > 30) {
+			premierCercleSec = 180;
+			deuxiemeCercleSec = ((seconds - 30) * 180) / 30;
+		}
+		if (minutes <= 30) {
+			premierCercleMin = (minutes * 180) / 30;
+			deuxiemeCercleMin = 0;
+		}
+		if (minutes > 30) {
+			premierCercleMin = 180;
+			deuxiemeCercleMin = ((minutes - 30) * 180) / 30;
+		}
+		if (hours <= 12) {
+			premierCercleHeure = (hours * 180) / 12;
+			deuxiemeCercleHeure = 0;
+		}
+		if (hours > 12) {
+			premierCercleHeure = 180;
+			deuxiemeCercleHeure = ((hours - 12) * 180) / 12;
+		}
+		if (days <= 3.5) {
+			premierCercleDay = (days * 180) / 3.5;
+			deuxiemeCercleDay = 0;
+		}
+		if (days > 3.5) {
+			premierCercleDay = 180;
+			deuxiemeCercleDay = ((days - 3.5) * 180) / 3.5;
+		}
+		if (weeks <= (nbre_semaine / 2)) {
+			premierCercleWeek = (weeks * 180) / (nbre_semaine / 2);
+			deuxiemeCercleWeek = 0;
+		}
+		if (weeks > (nbre_semaine / 2)) {
+			premierCercleWeek = 180;
+			deuxiemeCercleWeek = ((weeks - (nbre_semaine / 2)) * 180) / (nbre_semaine / 2);
+		}
+
 		if (weeks == 0) {
 			$("#week").prop('disabled', true);
 			$("#unit").val("days");
@@ -129,18 +338,50 @@ var x = setInterval(function() {
 			$("#hour").prop('disabled', false);
 			$("#minute").prop('disabled', false);
 		}
-		if (window.screen.width > window.screen.height) {
-			$("#clock").text(weeks + " semaines, " + days + " jours, " + hours + " h, " + minutes + " min, " + seconds + " s");
-		}
-		else {
-			$("#clock").text(weeks + " sem, " + days + " j, " + hours + " h, " + minutes + " min, " + seconds + " s");
-		}
 	} else if (unit == "day") {
+		$('#secondsTime').css('fontSize', "25px");
+		$('#weeks').hide();
+		$('#days').show();
+		$('#hours').show();
+		$('#minutes').show();
+		$('#seconds').show();
 		var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
 		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		if (seconds <= 30) {
+			premierCercleSec = (seconds * 180) / 30;
+			deuxiemeCercleSec = 0;
+		}
+		if (seconds > 30) {
+			premierCercleSec = 180;
+			deuxiemeCercleSec = ((seconds - 30) * 180) / 30;
+		}
+		if (minutes <= 30) {
+			premierCercleMin = (minutes * 180) / 30;
+			deuxiemeCercleMin = 0;
+		}
+		if (minutes > 30) {
+			premierCercleMin = 180;
+			deuxiemeCercleMin = ((minutes - 30) * 180) / 30;
+		}
+		if (hours <= 12) {
+			premierCercleHeure = (hours * 180) / 12;
+			deuxiemeCercleHeure = 0;
+		}
+		if (hours > 12) {
+			premierCercleHeure = 180;
+			deuxiemeCercleHeure = ((hours - 12) * 180) / 12;
+		}
+		if (days <= (nbre_jours / 2)) {
+			premierCercleDay = (days * 180) / (nbre_jours / 2);
+			deuxiemeCercleDay = 0;
+		}
+		if (days > (nbre_jours / 2)) {
+			premierCercleDay = 180;
+			deuxiemeCercleDay = ((days - (nbre_jours / 2)) * 180) / (nbre_jours / 2);
+		}
 		if (weeks == 0 && days == 0) {
 			$("#week").prop('disabled', true);
 			$("#day").prop('disabled', true);
@@ -150,18 +391,42 @@ var x = setInterval(function() {
 			$("#hour").prop('disabled', false);
 			$("#minute").prop('disabled', false);
 		}
-		if (window.screen.width > window.screen.height) {
-			$("#clock").text(days + " jours, " + hours + " h, " + minutes + " min, " + seconds + " s");
-		}
-		else {
-			$("#clock").text(days + " j, " + hours + " h, " + minutes + " min, " + seconds + " s");
-		}
 	} else if (unit == "hour") {
+		$('#secondsTime').css('fontSize', "25px");
+		$('#weeks').hide();
+		$('#days').hide();
+		$('#hours').show();
+		$('#minutes').show();
+		$('#seconds').show();
 		var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
 		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 		var hours = Math.floor(distance / (1000 * 60 * 60));
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		if (seconds <= 30) {
+			premierCercleSec = (seconds * 180) / 30;
+			deuxiemeCercleSec = 0;
+		}
+		if (seconds > 30) {
+			premierCercleSec = 180;
+			deuxiemeCercleSec = ((seconds - 30) * 180) / 30;
+		}
+		if (minutes <= 30) {
+			premierCercleMin = (minutes * 180) / 30;
+			deuxiemeCercleMin = 0;
+		}
+		if (minutes > 30) {
+			premierCercleMin = 180;
+			deuxiemeCercleMin = ((minutes - 30) * 180) / 30;
+		}
+		if (hours <= (nbre_heure / 2)) {
+			premierCercleHeure = (hours * 180) / (nbre_heure / 2);
+			deuxiemeCercleHeure = 0;
+		}
+		if (hours > (nbre_heure / 2)) {
+			premierCercleHeure = 180;
+			deuxiemeCercleHeure = ((hours - (nbre_heure / 2)) * 180) / (nbre_heure / 2);
+		}
 		if (weeks == 0 && days == 0 && hours == 0) {
 			$("#week").prop('disabled', true);
 			$("#day").prop('disabled', true);
@@ -171,18 +436,34 @@ var x = setInterval(function() {
 			$("#hour").prop('disabled', false);
 			$("#minute").prop('disabled', false);
 		}
-		if (window.screen.width > window.screen.height) {
-			$("#clock").text(hours + " h, " + minutes + " min, " + seconds + " s");
-		}
-		else {
-			$("#clock").text(hours + " h, " + minutes + " min, " + seconds + " s");
-		}
 	} else if (unit == "minute") {
+		$('#secondsTime').css('fontSize', "25px");
+		$('#weeks').hide();
+		$('#days').hide();
+		$('#hours').hide();
+		$('#minutes').show();
+		$('#seconds').show();
 		var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
 		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 		var hours = Math.floor(distance / (1000 * 60 * 60));
 		var minutes = Math.floor(distance / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		if (seconds <= 30) {
+			premierCercleSec = (seconds * 180) / 30;
+			deuxiemeCercleSec = 0;
+		}
+		if (seconds > 30) {
+			premierCercleSec = 180;
+			deuxiemeCercleSec = ((seconds - 30) * 180) / 30;
+		}
+		if (minutes <= (nbre_minute / 2)) {
+			premierCercleMin = (minutes * 180) / (nbre_minute / 2);
+			deuxiemeCercleMin = 0;
+		}
+		if (minutes > (nbre_minute / 2)) {
+			premierCercleMin = 180;
+			deuxiemeCercleMin = ((minutes - (nbre_minute / 2)) * 180) / (nbre_minute / 2);
+		}
 		if (weeks == 0 && days == 0 && hours == 0 && minutes == 0) {
 			$("#week").prop('disabled', true);
 			$("#day").prop('disabled', true);
@@ -194,9 +475,62 @@ var x = setInterval(function() {
 		}
 		$("#clock").text(Intl.NumberFormat().format(minutes) + " min, " + seconds + " s ");
 	} else {
+		$('#secondsTime').css('fontSize', "100%");
+		$('#weeks').hide();
+		$('#days').hide();
+		$('#hours').hide();
+		$('#minutes').hide();
+		$('#seconds').show();
 		var seconds = Math.floor(distance / 1000);
+		if (seconds <= (nbre_seconde / 2)) {
+			premierCercleSec = (seconds * 180) / (nbre_seconde / 2);
+			deuxiemeCercleSec = 0;
+		}
+		if (seconds > (nbre_seconde / 2)) {
+			premierCercleSec = 180;
+			deuxiemeCercleSec = ((seconds - (nbre_seconde / 2)) * 180) / (nbre_seconde / 2);
+		}
 		$("#clock").text(Intl.NumberFormat().format(seconds) + " s ");
 	}
+	$("#weekTime").html(weeks + "<br><span class='uniteCercle'>Week</span>");
+	$("#dayTime").html(days + "<br><span class='uniteCercle'>Day</span>");
+	$("#hoursTime").html(hours + "<br><span class='uniteCercle'>Hours</span>");
+	$("#minuteTime").html(minutes + "<br><span class='uniteCercle'>Min</span>");
+	$("#secondsTime").html(seconds + "<br><span class='uniteCercle'>Sec</span>");
+	$(".circular:nth-of-type(1) .circle .left .progress").css({
+		'transform': 'rotate(' + premierCercleWeek + 'deg)'
+	});
+	$(".circular:nth-of-type(1) .circle .right .progress").css({
+		'transform': 'rotate(' + deuxiemeCercleWeek + 'deg)'
+	});
+
+	$(".circular:nth-of-type(2) .circle .left .progress").css({
+		'transform': 'rotate(' + premierCercleDay + 'deg)'
+	});
+	$(".circular:nth-of-type(2) .circle .right .progress").css({
+		'transform': 'rotate(' + deuxiemeCercleDay + 'deg)'
+	});
+	//
+	$(".circular:nth-of-type(3) .circle .left .progress").css({
+		'transform': 'rotate(' + premierCercleHeure + 'deg)'
+	});
+	$(".circular:nth-of-type(3) .circle .right .progress").css({
+		'transform': 'rotate(' + deuxiemeCercleHeure + 'deg)'
+	});
+
+	$(".circular:nth-of-type(4) .circle .left .progress").css({
+		'transform': 'rotate(' + premierCercleMin + 'deg)'
+	});
+	$(".circular:nth-of-type(4) .circle .right .progress").css({
+		'transform': 'rotate(' + deuxiemeCercleMin + 'deg)'
+	});
+
+	$(".circular:nth-of-type(5) .circle .left .progress").css({
+		'transform': 'rotate(' + premierCercleSec + 'deg)'
+	});
+	$(".circular:nth-of-type(5) .circle .right .progress").css({
+		'transform': 'rotate(' + deuxiemeCercleSec + 'deg)'
+	});
 	if (distance <= 0 && endVacation - now >= 0) {
 		i++;
 		$('#progress').css('display', 'none')
@@ -224,55 +558,6 @@ var x = setInterval(function() {
 		i++;
 	}
 
-	if (j == 0) {
-		if (window.screen.width > window.screen.height) {
-			$("#body").css('background-image', "url(images/halloween.jpg)");
-		} else {
-			$("#body").css('background-image', "url(images/halloweenTel.jpg)");
-		}
-		$("#body").css('color', "white");
-		$("#unitLabel").css('color', "white");
-	}
-
-	if (j == 1) {
-		if (window.screen.width > window.screen.height) {
-			$("#body").css('background-image', "url(images/noel.jpg)");
-		} else {
-			$("#body").css('background-image', "url(images/noelTel.jpg)");
-		}
-		$("#body").css('color', "white");
-		$("#unitLabel").css('color', "white");
-	}
-
-	if (j == 2) {
-		if (window.screen.width > window.screen.height) {
-			$("#body").css('background-image', "url(images/ski.jpg)");
-		} else {
-			$("#body").css('background-image', "url(images/skiTel.jpg)");
-		}
-		$("#body").css('color', "yellow");
-		$("#unitLabel").css('color', "yellow");
-	}
-
-	if (j == 3) {
-		if (window.screen.width > window.screen.height) {
-			$("#body").css('background-image', "url(images/paques.jpg)");
-		} else {
-			$("#body").css('background-image', "url(images/paquesTel.jpg)");
-		}
-		$("#body").css('color', "yellow");
-		$("#unitLabel").css('color', "yellow");
-	}
-
-	if (j == 4) {
-		if (window.screen.width > window.screen.height) {
-			$("#body").css('background-image', "url(images/vacances.jpg)");
-		} else {
-			$("#body").css('background-image', "url(images/vacancesTel.jpg)");
-		}
-		$("#body").css('color', "black");
-		$("#unitLabel").css('color', "white");
-	}
 }, 50)
 const start = () => {
 	setTimeout(function() {
