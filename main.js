@@ -2,8 +2,6 @@ var unit = "week";
 var zone = "C";
 var city = {};
 var distance = 0;
-var userLongitude = 0;
-var userLatitude = 0;
 $('#zone-select').val(zone);
 
 var vacDay = "dS";
@@ -46,6 +44,7 @@ function findDistance(lon1, lat1, lon2, lat2) {
 	lat1 = parseFloat(lat1);
 	lon2 = parseFloat(lon2);
 	lat2 = parseFloat(lat2);
+	console.log(lon1, lat1, lon2, lat2);
 	var R = 6371e3; // R is earth’s radius
 	var lat1radians = toRadians(lat1);
 	var lat2radians = toRadians(lat2);
