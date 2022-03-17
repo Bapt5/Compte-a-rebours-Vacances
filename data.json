@@ -1,4 +1,4 @@
-data = '[
+[
   {
     "département": 1,
     "Ville": "OZAN",
@@ -217247,4 +217247,4 @@ data = '[
     "longitude": 2.48333,
     "Latitude": 49.1
   }
-]';
+]
