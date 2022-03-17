@@ -153,6 +153,7 @@ jQuery(document).ready(function($) {
 	$('#time-Vac').val(heurVac);
 	if ("geolocation" in navigator) {
 		navigator.geolocation.getCurrentPosition(function(position) {
+			console.log(position.coords.longitude, position.coords.latitude)
 			userLongitude = position.coords.longitude;
 			userLatitude = position.coords.latitude;
 			findCity(userLongitude, userLatitude)
