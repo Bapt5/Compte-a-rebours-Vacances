@@ -16,7 +16,7 @@ var data = $.getJSON('data.json', function() {
 	$.each(data, function(key, val) {
 		items.push(key + "," + val);
 	});
-	console.log(data);
+	console.log(items);
 })
 
 
