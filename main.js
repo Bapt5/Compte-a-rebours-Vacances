@@ -28,7 +28,6 @@ function findCity(userLongitude, userLatitude) {
 		.then(jsondata => donnee = jsondata);
 	for (var j = 0; j < donnee.length; j++) {
 		findDistance(userLongitude, userLatitude, donnee[j].longitude, donnee[j].latitude)
-		console.log(j);
 		if (city.distance > distance || Object.keys(city).length === 0) {
 			city = {}
 			city.departement = donnee[j].departement;
@@ -43,6 +42,7 @@ function findCity(userLongitude, userLatitude) {
 
 
 function findDistance(lon1, lat1, lon2, lat2) {
+	console.log(lon2);
 	var R = 6371e3; // R is earth’s radius
 	var lat1 = 23.18489670753479; // starting point lat
 	var lat2 = 32.726601;         // ending point lat
