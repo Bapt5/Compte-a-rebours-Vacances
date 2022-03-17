@@ -12,22 +12,34 @@ $('#time-Vac').val(heurVac);
 var departZone = { 1: "A", 2: "B", 3: "A", 4: "B", 5: "B", 6: "B", 7: "A", 8: "B", 9: "C", 10: "B", 11: "C", 12: "C", 13: "B", 14: "B", 15: "A", 16: "A", 17: "A", 18: "B", 19: "A", 21: "A", 22: "B", 23: "A", 24: "A", 25: "A", 26: "A", 27: "B", 28: "B", 29: "B", 30: "C", 31: "C", 32: "C", 33: "A", 34: "C", 35: "B", 36: "B", 37: "B", 38: "A", 39: "A", 40: "A", 41: "B", 42: "A", 43: "A", 44: "B", 45: "B", 46: "C", 47: "A", 48: "C", 49: "B", 50: "B", 51: "B", 52: "B", 53: "B", 54: "B", 55: "B", 56: "B", 57: "B", 58: "A", 59: "B", 60: "B", 61: "B", 62: "B", 63: "A", 64: "A", 65: "C", 66: "C", 67: "B", 68: "B", 69: "A", 70: "A", 71: "A", 72: "B", 73: "A", 74: "A", 75: "C", 76: "B", 77: "C", 78: "C", 79: "A", 80: "B", 81: "C", 82: "C", 83: "B", 84: "B", 85: "B", 86: "A", 87: "A", 88: "B", 89: "A", 90: "A", 91: "C", 92: "C", 93: "C", 94: "C", 95: "C" };
 
 var data = $.getJSON('data.json', function() {
+	var items = [];
+	$.each(data, function(key, val) {
+		items.push(key + "," + val);
+	});
 	console.log(data);
 })
 
 
-function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
-	var R = 6371; // Radius of the earth in km
-	var dLat = deg2rad(lat2 - lat1);  // deg2rad below
-	var dLon = deg2rad(lng2 - lng1);
-	var a =
-		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-		Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-		Math.sin(dLon / 2) * Math.sin(dLon / 2)
-		;
+function findDistance(lat1, lon1, lat2, lon2) {
+	var R = 6371e3; // R is earth’s radius
+	var lat1 = 23.18489670753479; // starting point lat
+	var lat2 = 32.726601;         // ending point lat
+	var lon1 = 72.62524545192719; // starting point lon
+	var lon2 = 74.857025;         // ending point lon
+	var lat1radians = toRadians(lat1);
+	var lat2radians = toRadians(lat2);
+	var latRadians = toRadians(lat2 - lat1);
+	var lonRadians = toRadians(lon2 - lon1);
+	var a = Math.sin(latRadians / 2) * Math.sin(latRadians / 2) +
+		Math.cos(lat1radians) * Math.cos(lat2radians) *
+		Math.sin(lonRadians / 2) * Math.sin(lonRadians / 2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-	var d = R * c; // Distance in km
-	return d;
+	var d = R * c;
+	console.log(d)
+}
+function toRadians(val) {
+	var PI = 3.1415926535;
+	return val / 180.0 * PI;
 }
 
 
