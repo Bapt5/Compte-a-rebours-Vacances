@@ -42,8 +42,8 @@ function findCity(userLongitude, userLatitude) {
 
 
 function findDistance(lon1, lat1, lon2, lat2) {
-	console.log(lon1, lat1, lon2, lat2);
-	console.log(typeof lon1, typeof lat1, typeof lon2, typeof lat2);
+	// console.log(lon1, lat1, lon2, lat2);
+	// console.log(typeof lon1, typeof lat1, typeof lon2, typeof lat2);
 	var R = 6371e3; // R is earth’s radius
 	var lat1radians = toRadians(lat1);
 	var lat2radians = toRadians(lat2);
@@ -153,8 +153,9 @@ jQuery(document).ready(function($) {
 	$('#time-Vac').val(heurVac);
 	if ("geolocation" in navigator) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			userLongitude = parseFloat(position.coords.longitude);
-			userLatitude = parseFloat(position.coords.latitude);
+			userLongitude = position.coords.longitude;
+			userLatitude = position.coords.latitude;
+			console.log(userLongitude, userLatitude);
 			findCity(userLongitude, userLatitude);
 			dateVacance();
 		});
