@@ -27,7 +27,7 @@ function findCity(userLongitude, userLatitude) {
 		})
 		.then(jsondata => donnee = jsondata);
 	for (var j = 0; j < donnee.length; j++) {
-		findDistance(userLongitude, userLatitude, donnee[j].longitude, donnee[j].latitude)
+		findDistance(parseFloat(userLongitude), parseFloat(userLatitude), parseFloat(donnee[j].longitude), parseFloat(donnee[j].latitude))
 		if (city.distance > distance || Object.keys(city).length === 0) {
 			city = {}
 			city.departement = donnee[j].departement;
