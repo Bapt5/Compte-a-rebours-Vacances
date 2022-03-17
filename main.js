@@ -35,9 +35,9 @@ function findCity(userLongitude, userLatitude) {
 			city.longitude = donnee[j].longitude;
 			city.latitude = donnee[j].latitude;
 			city.distance = distance;
+			console.log(city);
 		}
 	}
-	console.log(city);
 }
 
 
