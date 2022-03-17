@@ -21,6 +21,7 @@ var donnee = {};
 
 
 function findCity(userLongitude, userLatitude) {
+	console.log(userLongitude, userLatitude);
 	fetch("data.json")
 		.then(response => {
 			return response.json();
@@ -42,7 +43,7 @@ function findCity(userLongitude, userLatitude) {
 
 
 function findDistance(lon1, lat1, lon2, lat2) {
-	console.log(lon1, lat1, lon2, lat2);
+	// console.log(lon1, lat1, lon2, lat2);
 	var R = 6371e3; // R is earth’s radius
 	var lat1radians = toRadians(lat1);
 	var lat2radians = toRadians(lat2);
@@ -53,7 +54,7 @@ function findDistance(lon1, lat1, lon2, lat2) {
 		Math.sin(lonRadians / 2) * Math.sin(lonRadians / 2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	distance = R * c;
-	console.log(distance);
+	// console.log(distance);
 	return distance
 }
 function toRadians(val) {
@@ -152,8 +153,8 @@ jQuery(document).ready(function($) {
 	$('#time-Vac').val(heurVac);
 	if ("geolocation" in navigator) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			userLongitude = position.coords.longitude;
-			userLatitude = position.coords.latitude;
+			userLongitude = parseFloat(position.coords.longitude);
+			userLatitude = parseFloat(position.coords.latitude);
 			findCity(userLongitude, userLatitude);
 			dateVacance();
 		});
