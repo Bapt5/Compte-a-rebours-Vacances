@@ -19,7 +19,6 @@ var donnee = {};
 
 
 function findCity(userLongitude, userLatitude) {
-	console.log(userLongitude, userLatitude);
 	fetch("data.json")
 		.then(response => {
 			return response.json();
@@ -36,7 +35,7 @@ function findCity(userLongitude, userLatitude) {
 			city.distance = distance;
 		}
 	}
-	console.log(city);
+	// console.log(city);
 }
 
 
@@ -151,6 +150,7 @@ jQuery(document).ready(function($) {
 	$('#time-Vac').val(heurVac);
 	if ("geolocation" in navigator) {
 		navigator.geolocation.getCurrentPosition(function(position) {
+			console.log(position.coords.longitude, position.coords.latitude);
 			findCity(position.coords.longitude, position.coords.latitude);
 			dateVacance();
 		});
