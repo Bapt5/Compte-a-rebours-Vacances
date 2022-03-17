@@ -151,10 +151,7 @@ jQuery(document).ready(function($) {
 	$('#time-Vac').val(heurVac);
 	if ("geolocation" in navigator) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			userLongitude = position.coords.longitude;
-			userLatitude = position.coords.latitude;
-			console.log(userLongitude, userLatitude);
-			findCity(userLongitude, userLatitude);
+			findCity(position.coords.longitude, position.coords.latitude);
 			dateVacance();
 		});
 	} else {
