@@ -42,8 +42,10 @@ function findCity(userLongitude, userLatitude) {
 
 
 function findDistance(lon1, lat1, lon2, lat2) {
-	// console.log(lon1, lat1, lon2, lat2);
-	// console.log(typeof lon1, typeof lat1, typeof lon2, typeof lat2);
+	lon1 = parseFloat(lon1);
+	lat1 = parseFloat(lat1);
+	lon2 = parseFloat(lon2);
+	lat2 = parseFloat(lat2);
 	var R = 6371e3; // R is earth’s radius
 	var lat1radians = toRadians(lat1);
 	var lat2radians = toRadians(lat2);
@@ -54,7 +56,7 @@ function findDistance(lon1, lat1, lon2, lat2) {
 		Math.sin(lonRadians / 2) * Math.sin(lonRadians / 2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	distance = R * c;
-	// console.log(distance);
+	console.log(distance);
 	return distance
 }
 function toRadians(val) {
