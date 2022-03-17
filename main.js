@@ -35,7 +35,6 @@ function findCity(userLongitude, userLatitude) {
 			city.longitude = donnee[j].longitude;
 			city.latitude = donnee[j].latitude;
 			city.distance = distance;
-
 		}
 	}
 	console.log(city);
@@ -53,6 +52,7 @@ function findDistance(lon1, lat1, lon2, lat2) {
 		Math.sin(lonRadians / 2) * Math.sin(lonRadians / 2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	distance = R * c;
+	console.log(distance);
 	return distance
 }
 function toRadians(val) {
