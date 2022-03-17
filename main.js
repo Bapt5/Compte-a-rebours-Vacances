@@ -1,5 +1,8 @@
 var unit = "week";
 var zone = "C";
+var city = {};
+var userLongitude = 0;
+var userLatitude = 0;
 $('#zone-select').val(zone);
 
 var vacDay = "dS";
@@ -12,22 +15,31 @@ var departZone = { 1: "A", 2: "B", 3: "A", 4: "B", 5: "B", 6: "B", 7: "A", 8: "B
 
 
 var donnee = {};
-fetch("data.json")
-	.then(response => {
-		return response.json();
-	})
-	.then(jsondata => donnee = jsondata);
-findCity()
 
 
-function findCity() {
+
+
+function findCity(userLongitude, userLatitude) {
+	fetch("data.json")
+		.then(response => {
+			return response.json();
+		})
+		.then(jsondata => donnee = jsondata);
 	for (var j = 0; j < donnee.length; j++) {
-		console.log(donnee[j])
+		findDistance(userLongitude, userLatitude, donnee[j].longitude, donnee[j].latitude)
+		if (city.distance > distance || Object.keys(city).length === 0) {
+			city = {}
+			city.departement = donnee[j].departement;
+			city.ville = donnee[j].ville;
+			city.longitude = donnee[j].longitude;
+			city.latitude = donnee[j].latitude;
+			city.distance = distance;
+		}
 	}
 }
 
 
-function findDistance(lat1, lon1, lat2, lon2) {
+function findDistance(lon1, lat1, lon2, lat2) {
 	var R = 6371e3; // R is earth’s radius
 	var lat1 = 23.18489670753479; // starting point lat
 	var lat2 = 32.726601;         // ending point lat
@@ -41,8 +53,9 @@ function findDistance(lat1, lon1, lat2, lon2) {
 		Math.cos(lat1radians) * Math.cos(lat2radians) *
 		Math.sin(lonRadians / 2) * Math.sin(lonRadians / 2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-	var d = R * c;
-	console.log(d)
+	var distance = R * c;
+	console.log(distance);
+	return distance
 }
 function toRadians(val) {
 	var PI = 3.1415926535;
@@ -140,8 +153,9 @@ jQuery(document).ready(function($) {
 	$('#time-Vac').val(heurVac);
 	if ("geolocation" in navigator) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			console.log("Found your location \nLat : " + position.coords.latitude + " \nLang :" + position.coords.longitude);
-			var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + '%2C' + position.coords.longitude + '&language=fr&key=AIzaSyDfvhc13Zir5EQC-Zlwt5UH6rymm5TY4s0';
+			userLongitude = position.coords.longitude;
+			userLatitude = position.coords.latitude;
+			findCity(userLongitude, userLatitude)
 			dateVacance()
 		});
 	} else {
