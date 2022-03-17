@@ -26,7 +26,7 @@ function findCity() {
 		.then(jsondata => donnee = jsondata);
 	for (var j = 0; j < donnee.length; j++) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			console.log(position.coords.longitude, position.coords.latitude);
+			console.log(donnee[j].longitude, donnee[j].latitude);
 			findDistance(position.coords.longitude, position.coords.latitude, donnee[j].longitude, donnee[j].latitude);
 		});
 		if (city.distance > distance || Object.keys(city).length === 0) {
