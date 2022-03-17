@@ -1,6 +1,7 @@
 var unit = "week";
 var zone = "C";
 var city = {};
+var distance = 0;
 var userLongitude = 0;
 var userLatitude = 0;
 $('#zone-select').val(zone);
@@ -53,7 +54,7 @@ function findDistance(lon1, lat1, lon2, lat2) {
 		Math.cos(lat1radians) * Math.cos(lat2radians) *
 		Math.sin(lonRadians / 2) * Math.sin(lonRadians / 2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-	var distance = R * c;
+	distance = R * c;
 	console.log(distance);
 	return distance
 }
