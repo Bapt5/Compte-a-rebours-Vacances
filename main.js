@@ -43,7 +43,7 @@ function findCity(userLongitude, userLatitude) {
 	// console.log(city);
 }
 
-s
+
 function findDistance(lon1, lat1, lon2, lat2) {
 	console.log("5: ", typeof lon1, lon1, typeof lat1, lat1, lon2, lat2);
 	var R = 6371e3; // R is earth’s radius
