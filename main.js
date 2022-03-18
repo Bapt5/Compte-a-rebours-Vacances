@@ -30,7 +30,7 @@ function findCity(userLongitude, userLatitude) {
 	// console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
 	for (var i = 0; i < 36208; i++) {
 		// console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
-		console.log(donnee[i].longitude);
+		console.log(i);
 		// findDistance(longitude, latitude, donnee[i].longitude, donnee[i].latitude);
 		// if (city.distance > distance || Object.keys(city).length === 0) {
 		// 	city = {}
