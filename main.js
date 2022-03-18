@@ -28,7 +28,7 @@ function findCity(userLongitude, userLatitude) {
 		})
 		.then(jsondata => donnee = jsondata);
 	console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
-	for (var j = 0; j < 500; j++) {
+	for (var j = 0; j < donnee.length; j++) {
 		console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
 		findDistance(longitude, latitude, donnee[j].longitude, donnee[j].latitude);
 		if (city.distance > distance || Object.keys(city).length === 0) {
