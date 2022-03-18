@@ -19,13 +19,13 @@ var donnee = {};
 
 
 function findCity(userLongitude, userLatitude) {
-	console.log(typeof userLongitude, userLongitude, typeof userLatitude, userLatitude);
 	fetch("data.json")
 		.then(response => {
 			return response.json();
 		})
 		.then(jsondata => donnee = jsondata);
 	for (var j = 0; j < donnee.length; j++) {
+		console.log(typeof userLongitude, userLongitude, typeof userLatitude, userLatitude);
 		findDistance(userLongitude, userLatitude, donnee[j].longitude, donnee[j].latitude);
 		if (city.distance > distance || Object.keys(city).length === 0) {
 			city = {}
