@@ -14,7 +14,6 @@ var departZone = { 1: "A", 2: "B", 3: "A", 4: "B", 5: "B", 6: "B", 7: "A", 8: "B
 
 
 function findCity(userLongitude, userLatitude) {
-	var donnee = {};
 	var longitude = userLongitude;
 	var latitude = userLatitude;
 	// console.log("2: ", typeof longitude, longitude, typeof latitude, latitude);
@@ -24,8 +23,7 @@ function findCity(userLongitude, userLatitude) {
 		})
 		.then(jsondata => {
 			donnee = jsondata;
-			console.log(jsondata);
-			console.log(donnee);
+			return donnee;
 		});
 	// console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
 	console.log(donnee[0]);
