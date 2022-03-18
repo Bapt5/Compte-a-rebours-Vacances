@@ -34,9 +34,9 @@ function findCity(userLongitude, userLatitude) {
 					city.distance = distance;
 				}
 			}
+			console.log(city);
 			return jsondata;
 		});
-	console.log(city);
 }
 
 
