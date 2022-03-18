@@ -18,17 +18,15 @@ var donnee = {};
 
 
 
-function findCity() {
+function findCity(userLongitude, userLatitude) {
+	console.log(userLongitude, userLatitude);
 	fetch("data.json")
 		.then(response => {
 			return response.json();
 		})
 		.then(jsondata => donnee = jsondata);
 	for (var j = 0; j < donnee.length; j++) {
-		navigator.geolocation.getCurrentPosition(function(position) {
-			console.log(donnee[j].longitude, donnee[j].latitude);
-			findDistance(position.coords.longitude, position.coords.latitude, donnee[j].longitude, donnee[j].latitude);
-		});
+		findDistance(userLongitude, userLatitude, donnee[j].longitude, donnee[j].latitude);
 		if (city.distance > distance || Object.keys(city).length === 0) {
 			city = {}
 			city.departement = donnee[j].departement;
@@ -152,7 +150,9 @@ jQuery(document).ready(function($) {
 	$('#dayVac-select').val(vacDay);
 	$('#time-Vac').val(heurVac);
 	if ("geolocation" in navigator) {
-		findCity();
+		navigator.geolocation.getCurrentPosition(function(position) {
+			findCity(position.coords.latitude, position.coords.longitude);
+		});
 		dateVacance();
 	} else {
 		console.log("Browser doesn't support geolocation!");
