@@ -27,8 +27,9 @@ function findCity(userLongitude, userLatitude) {
 			return response.json();
 		})
 		.then(jsondata => donnee = jsondata);
+	console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
 	for (var j = 0; j < donnee.length; j++) {
-		console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
+		console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
 		findDistance(longitude, latitude, donnee[j].longitude, donnee[j].latitude);
 		if (city.distance > distance || Object.keys(city).length === 0) {
 			city = {}
@@ -42,9 +43,9 @@ function findCity(userLongitude, userLatitude) {
 	// console.log(city);
 }
 
-
+s
 function findDistance(lon1, lat1, lon2, lat2) {
-	console.log("4: ", typeof lon1, lon1, typeof lat1, lat1, lon2, lat2);
+	console.log("5: ", typeof lon1, lon1, typeof lat1, lat1, lon2, lat2);
 	var R = 6371e3; // R is earth’s radius
 	var lat1radians = toRadians(lat1);
 	var lat2radians = toRadians(lat2);
