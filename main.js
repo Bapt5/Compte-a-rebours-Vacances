@@ -17,29 +17,33 @@ function findCity(userLongitude, userLatitude) {
 	var longitude = userLongitude;
 	var latitude = userLatitude;
 	// console.log("2: ", typeof longitude, longitude, typeof latitude, latitude);
-	fetch("data.json")
+	var promis = fetch("data.json")
 		.then(response => {
 			return response.json();
 		})
 		.then(jsondata => {
+			var len = Object.keys(jsondata).length;
+			for (let i = 0; i < len; i++) {
+				console.log(jsondata[i]);
+			}
 			return jsondata;
 		});
 	// console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
-	console.log(jsondata);
-	var len = Object.keys(jsondata).length;
-	for (let i = 0; i < len; i++) {
-		// console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
-		console.log(jsondata[i]);
-		// findDistance(longitude, latitude, jsondata[i].longitude, jsondata[i].latitude);
-		// if (city.distance > distance || Object.keys(city).length === 0) {
-		// 	city = {}
-		// 	city.departement = jsondata[i].departement;
-		// 	city.ville = jsondata[i].ville;
-		// 	city.longitude = jsondata[i].longitude;
-		// 	city.latitude = jsondata[i].latitude;
-		// 	city.distance = distance;
-		// }
-	}
+	// console.log(jsp);
+	// var len = Object.keys(jsondata).length;
+	// for (let i = 0; i < len; i++) {
+	// console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
+
+	// findDistance(longitude, latitude, jsondata[i].longitude, jsondata[i].latitude);
+	// if (city.distance > distance || Object.keys(city).length === 0) {
+	// 	city = {}
+	// 	city.departement = jsondata[i].departement;
+	// 	city.ville = jsondata[i].ville;
+	// 	city.longitude = jsondata[i].longitude;
+	// 	city.latitude = jsondata[i].latitude;
+	// 	city.distance = distance;
+	// }
+	// }
 	console.log(city);
 }
 
