@@ -29,7 +29,7 @@ function findCity(userLongitude, userLatitude) {
 		.then(jsondata => donnee = jsondata);
 	console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
 
-	for (var i = 0; i < donnee.length; i++) {
+	for (var i = 0; i < 50; i++) {
 		console.log('ok');
 	}
 	// for (var j = 0; j < donnee.length; j++) {
