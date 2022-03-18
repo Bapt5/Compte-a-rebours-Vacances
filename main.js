@@ -39,7 +39,6 @@ function findCity(userLatitude, userLongitude) {
 					zone = departZone[keyzone[i]]
 				}
 			}
-			console.log(city, zone);
 		});
 }
 
