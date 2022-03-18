@@ -120,6 +120,9 @@ function test() {
 			$('#week').click();
 		}
 	});
+	$(".navbar-toggle").on("click", function() {
+		$(".navbar-collapse").slideToggle(300);
+	});
 }
 $(document).ready(function() {
 	setTimeout(function() { test(); });

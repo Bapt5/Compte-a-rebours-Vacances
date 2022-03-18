@@ -225,27 +225,27 @@ html, body{
 .circular:nth-of-type(1) .circle .left .progress{
   z-index:1;
   transform: rotate(180deg);
-  transition: transform 1s;
+  /* transition: transform 1s; */
 }
 .circular:nth-of-type(2) .circle .left .progress{
   z-index:1;
   transform: rotate(180deg);
-  transition: transform 1s;
+  /* transition: transform 1s; */
 }
 .circular:nth-of-type(3) .circle .left .progress{
   z-index:1;
   transform: rotate(180deg);
-  transition: transform 1s;
+  /* transition: transform 1s; */
 }
 .circular:nth-of-type(4) .circle .left .progress{
   z-index:1;
   transform: rotate(180deg);
-  transition: transform 1s;
+  /* transition: transform 1s; */
 }
 .circular:nth-of-type(5) .circle .left .progress{
   z-index:1;
   transform: rotate(180deg);
-  transition: transform 1s;
+  /* transition: transform 1s; */
 }
 @keyframes left{
   100%{
@@ -260,27 +260,27 @@ html, body{
 
 .circular:nth-of-type(1) .circle .right .progress{
   transform: rotate(180deg);
-  transition: transform 1s;
+  /* transition: transform 1s; */
   /* animation-delay:4s; */
 }
 .circular:nth-of-type(2) .circle .right .progress{
   transform: rotate(180deg);
-  transition: transform 1s;
+  /* transition: transform 1s; */
   /* animation-delay:4s; */
 }
 .circular:nth-of-type(3) .circle .right .progress{
   transform: rotate(180deg);
-  transition: transform 1s;
+  /* transition: transform 1s; */
   /* animation-delay:4s; */
 }
 .circular:nth-of-type(4) .circle .right .progress{
   transform: rotate(180deg);
-  transition: transform 1s;
+  /* transition: transform 1s; */
   /* animation-delay:4s; */
 }
 .circular:nth-of-type(5) .circle .right .progress{
   transform: rotate(180deg);
-  transition: transform 1s;
+  /* transition: transform 1s; */
   /* animation-delay:4s; */
 }
 @keyframes right{
