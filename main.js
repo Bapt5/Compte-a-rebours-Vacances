@@ -22,22 +22,21 @@ function findCity(userLongitude, userLatitude) {
 			return response.json();
 		})
 		.then(jsondata => {
-			donnee = jsondata;
-			return donnee;
+			return jsondata;
 		});
 	// console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
-	console.log(donnee);
-	var len = Object.keys(donnee).length;
+	console.log(jsondata);
+	var len = Object.keys(jsondata).length;
 	for (let i = 0; i < len; i++) {
 		// console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
-		console.log(donnee[i]);
-		// findDistance(longitude, latitude, donnee[i].longitude, donnee[i].latitude);
+		console.log(jsondata[i]);
+		// findDistance(longitude, latitude, jsondata[i].longitude, jsondata[i].latitude);
 		// if (city.distance > distance || Object.keys(city).length === 0) {
 		// 	city = {}
-		// 	city.departement = donnee[i].departement;
-		// 	city.ville = donnee[i].ville;
-		// 	city.longitude = donnee[i].longitude;
-		// 	city.latitude = donnee[i].latitude;
+		// 	city.departement = jsondata[i].departement;
+		// 	city.ville = jsondata[i].ville;
+		// 	city.longitude = jsondata[i].longitude;
+		// 	city.latitude = jsondata[i].latitude;
 		// 	city.distance = distance;
 		// }
 	}
@@ -278,9 +277,9 @@ var x = setInterval(function() {
 		url: 'https://api-ratp.pierre-grimaud.fr/v4/traffic',
 		dataType: 'json',
 		data: {},
-		success: function(donnee) {
-			$.map(donnee, function() {
-				now = donnee._metadata.date;
+		success: function(jsondata) {
+			$.map(jsondata, function() {
+				now = jsondata._metadata.date;
 				now = new Date(now.substring(0, now.length - 6));
 			});
 		}
