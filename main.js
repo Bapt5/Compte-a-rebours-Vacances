@@ -21,35 +21,31 @@ var donnee = {};
 function findCity(userLongitude, userLatitude) {
 	var longitude = userLongitude;
 	var latitude = userLatitude;
-	console.log("2: ", typeof longitude, longitude, typeof latitude, latitude);
+	// console.log("2: ", typeof longitude, longitude, typeof latitude, latitude);
 	fetch("data.json")
 		.then(response => {
 			return response.json();
 		})
 		.then(jsondata => donnee = jsondata);
-	console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
-
+	// console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
 	for (var i = 0; i < 36208; i++) {
-		console.log('ok');
+		// console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
+		findDistance(longitude, latitude, donnee[j].longitude, donnee[j].latitude);
+		if (city.distance > distance || Object.keys(city).length === 0) {
+			city = {}
+			city.departement = donnee[j].departement;
+			city.ville = donnee[j].ville;
+			city.longitude = donnee[j].longitude;
+			city.latitude = donnee[j].latitude;
+			city.distance = distance;
+		}
 	}
-	// for (var j = 0; j < donnee.length; j++) {
-	// console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
-	// findDistance(longitude, latitude, donnee[j].longitude, donnee[j].latitude);
-	// if (city.distance > distance || Object.keys(city).length === 0) {
-	// 	city = {}
-	// 	city.departement = donnee[j].departement;
-	// 	city.ville = donnee[j].ville;
-	// 	city.longitude = donnee[j].longitude;
-	// 	city.latitude = donnee[j].latitude;
-	// 	city.distance = distance;
-	// }
-	// }
-	// console.log(city);
+	console.log(city);
 }
 
 
 function findDistance(lon1, lat1, lon2, lat2) {
-	console.log("5: ", typeof lon1, lon1, typeof lat1, lat1, lon2, lat2);
+	console.log(lon1, lat1, lon2, lat2);
 	var R = 6371e3; // R is earth’s radius
 	var lat1radians = toRadians(lat1);
 	var lat2radians = toRadians(lat2);
@@ -159,7 +155,6 @@ jQuery(document).ready(function($) {
 	$('#time-Vac').val(heurVac);
 	if ("geolocation" in navigator) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			console.log("1: ", typeof position.coords.latitude, position.coords.latitude, typeof position.coords.longitude, position.coords.longitude)
 			findCity(position.coords.latitude, position.coords.longitude);
 		});
 		dateVacance();
