@@ -19,7 +19,7 @@ var donnee = {};
 
 
 function findCity(userLongitude, userLatitude) {
-	console.log(typeof userLongitude, typeof userLatitude);
+	console.log(typeof userLongitude, userLongitude, typeof userLatitude, userLatitude);
 	fetch("data.json")
 		.then(response => {
 			return response.json();
