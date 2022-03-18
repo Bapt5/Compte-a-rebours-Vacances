@@ -16,7 +16,6 @@ var departZone = { 1: "A", 2: "B", 3: "A", 4: "B", 5: "B", 6: "B", 7: "A", 8: "B
 function findCity(userLongitude, userLatitude) {
 	var longitude = userLongitude;
 	var latitude = userLatitude;
-	// console.log("2: ", typeof longitude, longitude, typeof latitude, latitude);
 	var promis = fetch("data.json")
 		.then(response => {
 			return response.json();
