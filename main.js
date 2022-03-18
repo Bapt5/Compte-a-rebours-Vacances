@@ -30,13 +30,13 @@ function findCity(userLongitude, userLatitude) {
 	// console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
 	for (var i = 0; i < 36208; i++) {
 		// console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
-		findDistance(longitude, latitude, donnee[j].longitude, donnee[j].latitude);
+		findDistance(longitude, latitude, donnee[i].longitude, donnee[i].latitude);
 		if (city.distance > distance || Object.keys(city).length === 0) {
 			city = {}
-			city.departement = donnee[j].departement;
-			city.ville = donnee[j].ville;
-			city.longitude = donnee[j].longitude;
-			city.latitude = donnee[j].latitude;
+			city.departement = donnee[i].departement;
+			city.ville = donnee[i].ville;
+			city.longitude = donnee[i].longitude;
+			city.latitude = donnee[i].latitude;
 			city.distance = distance;
 		}
 	}
