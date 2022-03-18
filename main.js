@@ -31,7 +31,7 @@ function findCity(userLongitude, userLatitude) {
 	for (var j = 0; j < donnee.length; j++) {
 		console.log('ok');
 		console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
-		findDistance(longitude, latitude, donnee[j].longitude, donnee[j].latitude);
+		// findDistance(longitude, latitude, donnee[j].longitude, donnee[j].latitude);
 		// if (city.distance > distance || Object.keys(city).length === 0) {
 		// 	city = {}
 		// 	city.departement = donnee[j].departement;
