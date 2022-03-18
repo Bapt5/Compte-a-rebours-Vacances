@@ -22,7 +22,11 @@ function findCity(userLongitude, userLatitude) {
 		.then(response => {
 			return response.json();
 		})
-		.then(jsondata => donnee = jsondata);
+		.then(jsondata => {
+			donnee = jsondata;
+			console.log(jsondata);
+			console.log(donnee);
+		});
 	// console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
 	console.log(donnee[0]);
 	var len = Object.keys(donnee).length;
