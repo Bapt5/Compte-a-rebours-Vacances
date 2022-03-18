@@ -26,7 +26,7 @@ function findCity(userLongitude, userLatitude) {
 			return donnee;
 		});
 	// console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
-	console.log(donnee[0]);
+	console.log(donnee);
 	var len = Object.keys(donnee).length;
 	for (let i = 0; i < len; i++) {
 		// console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
