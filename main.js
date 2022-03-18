@@ -28,19 +28,22 @@ function findCity(userLongitude, userLatitude) {
 		})
 		.then(jsondata => donnee = jsondata);
 	console.log("3: ", typeof longitude, longitude, typeof latitude, latitude);
-	for (var j = 0; j < donnee.length; j++) {
+
+	for (var i = 0; i < donnee.length; i++) {
 		console.log('ok');
-		// console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
-		// findDistance(longitude, latitude, donnee[j].longitude, donnee[j].latitude);
-		// if (city.distance > distance || Object.keys(city).length === 0) {
-		// 	city = {}
-		// 	city.departement = donnee[j].departement;
-		// 	city.ville = donnee[j].ville;
-		// 	city.longitude = donnee[j].longitude;
-		// 	city.latitude = donnee[j].latitude;
-		// 	city.distance = distance;
-		// }
 	}
+	// for (var j = 0; j < donnee.length; j++) {
+	// console.log("4: ", typeof longitude, longitude, typeof latitude, latitude);
+	// findDistance(longitude, latitude, donnee[j].longitude, donnee[j].latitude);
+	// if (city.distance > distance || Object.keys(city).length === 0) {
+	// 	city = {}
+	// 	city.departement = donnee[j].departement;
+	// 	city.ville = donnee[j].ville;
+	// 	city.longitude = donnee[j].longitude;
+	// 	city.latitude = donnee[j].latitude;
+	// 	city.distance = distance;
+	// }
+	// }
 	// console.log(city);
 }
 
