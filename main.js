@@ -287,7 +287,8 @@ var x = setInterval(function() {
 		}
 	});
 
-	var vacation = dates[i];
+	// var vacation = dates[i];
+	vacation = new Date("20220320T14:25:00");
 	console.log(vacation);
 	var endVacation = endDAtes[j];
 	var distance = vacation - now;
