@@ -121,6 +121,7 @@ function test() {
 		}
 	});
 	$(".navbar-toggle").on("click", function() {
+		console.log('yes');
 		$(".navbar-collapse").slideToggle(300);
 	});
 }
@@ -131,6 +132,7 @@ $(window).on('resize', function() {
 	setTimeout(function() { test(); }, 500);
 });
 $(".navbar-toggler").click(function() {
+	console.log('yes');
 	$(".navbar-collapse").slideToggle(300);
 	setTimeout(function() { test(); });
 });
@@ -286,6 +288,7 @@ var x = setInterval(function() {
 	});
 
 	var vacation = dates[i];
+	console.log(vacation);
 	var endVacation = endDAtes[j];
 	var distance = vacation - now;
 	if (distance > 0) {
