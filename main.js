@@ -116,7 +116,10 @@ function test() {
 	$(".navbar-toggler").click(function() {
 		// console.log('2');
 		$(".navbar-collapse").slideToggle(300);
-		// setTimeout(function() { test(); });	
+		var target = $('#navbarSupportedContent ul li a[href="' + path + '"]');
+		// Add active class to target link
+		target.parent().addClass('active');
+		// setTimeout(function() { test(); });
 	});
 	// $(".navbar-toggle").on("click", function() {
 	// 	console.log('yes');
