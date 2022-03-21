@@ -116,23 +116,22 @@ function test() {
 	$(".navbar-toggler").click(function() {
 		// console.log('2');
 		$(".navbar-collapse").slideToggle(300);
-		$("#week").addClass('active');
-		// setTimeout(function() { test(); });
-	});
-	// $(".navbar-toggle").on("click", function() {
-	// 	console.log('yes');
-	// 	$(".navbar-collapse").slideToggle(300);
-	// });
-	$(".close").on("click", function() {
+		setTimeout(function() { test(); }, 1000 });
+});
+// $(".navbar-toggle").on("click", function() {
+// 	console.log('yes');
+// 	$(".navbar-collapse").slideToggle(300);
+// });
+$(".close").on("click", function() {
+	$("#myModal").css("display", "none");
+	$('#week').click();
+});
+$(window).on("click", function(event) {
+	if (event.target.id == "myModal") {
 		$("#myModal").css("display", "none");
 		$('#week').click();
-	});
-	$(window).on("click", function(event) {
-		if (event.target.id == "myModal") {
-			$("#myModal").css("display", "none");
-			$('#week').click();
-		}
-	});
+	}
+});
 }
 $(document).ready(function() {
 	setTimeout(function() { test(); });
