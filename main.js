@@ -125,6 +125,7 @@ function test() {
 	});
 	$(".navbar-toggler").click(function() {
 		$(".navbar-collapse").slideToggle(300);
+		console.log("ok");
 		setTimeout(function() { test(); });
 	});
 
