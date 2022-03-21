@@ -99,6 +99,17 @@ function test() {
 			"width": activeWidthNewAnimWidth + "px"
 		});
 	});
+	$(document).ready(function() {
+		setTimeout(function() { test(); });
+	});
+	$(window).on('resize', function() {
+		setTimeout(function() { test(); }, 500);
+	});
+	$(".navbar-toggler").click(function() {
+		$(".navbar-collapse").slideToggle(300);
+		console.log("ok");
+		setTimeout(function() { test(); });
+	});
 	$('#submit').on("click", function() {
 		zone = $('#zone-select').val();
 		vacDay = $('#dayVac-select').val();
@@ -114,22 +125,14 @@ function test() {
 		$("#myModal").css("display", "none");
 		$('#week').click();
 	});
-	$(document).ready(function() {
-		setTimeout(function() { test(); });
-	});
 	$(window).on("click", function(event) {
 		if (event.target.id == "myModal") {
 			$("#myModal").css("display", "none");
 			$('#week').click();
 		}
 	});
-	$(".navbar-toggler").click(function() {
-		$(".navbar-collapse").slideToggle(300);
-		console.log("ok");
-		setTimeout(function() { test(); });
-	});
-
 }
+
 $(document).ready(function() {
 	setTimeout(function() { test(); });
 });
