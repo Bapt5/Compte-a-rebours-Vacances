@@ -110,6 +110,21 @@ function test() {
 		$("#myModal").css("display", "none");
 		$('#week').click();
 	});
+	$(window).on('resize', function() {
+		setTimeout(function() { test(); }, 500);
+	});
+	$(".navbar-toggler").click(function() {
+		console.log('yes');
+		$(".navbar-collapse").slideToggle(300);
+		setTimeout(function() { test(); });
+	});
+	$(document).ready(function() {
+		setTimeout(function() { test(); });
+	});
+	$(".navbar-toggle").on("click", function() {
+		console.log('yes');
+		$(".navbar-collapse").slideToggle(300);
+	});
 	$(".close").on("click", function() {
 		$("#myModal").css("display", "none");
 		$('#week').click();
@@ -120,22 +135,9 @@ function test() {
 			$('#week').click();
 		}
 	});
-	$(".navbar-toggle").on("click", function() {
-		console.log('yes');
-		$(".navbar-collapse").slideToggle(300);
-	});
 }
-$(document).ready(function() {
-	setTimeout(function() { test(); });
-});
-$(window).on('resize', function() {
-	setTimeout(function() { test(); }, 500);
-});
-$(".navbar-toggler").click(function() {
-	console.log('yes');
-	$(".navbar-collapse").slideToggle(300);
-	setTimeout(function() { test(); });
-});
+
+
 
 
 
