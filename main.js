@@ -133,20 +133,6 @@ function test() {
 	});
 }
 
-$(document).ready(function() {
-	setTimeout(function() { test(); });
-});
-$(window).on('resize', function() {
-	setTimeout(function() { test(); }, 500);
-});
-$(".navbar-toggler").click(function() {
-	console.log('yes');
-	$(".navbar-collapse").slideToggle(300);
-	setTimeout(function() { test(); });
-});
-
-
-
 // --------------add active class-on another-page move----------
 jQuery(document).ready(function($) {
 	if (localStorage.length == 0) {
