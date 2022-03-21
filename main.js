@@ -118,9 +118,6 @@ function test() {
 		$(".navbar-collapse").slideToggle(300);
 		setTimeout(function() { test(); });
 	});
-	$(document).ready(function() {
-		setTimeout(function() { test(); });
-	});
 	$(".navbar-toggle").on("click", function() {
 		console.log('yes');
 		$(".navbar-collapse").slideToggle(300);
@@ -136,7 +133,9 @@ function test() {
 		}
 	});
 }
-
+$(document).ready(function() {
+	setTimeout(function() { test(); });
+});
 
 
 
