@@ -1,3 +1,6 @@
+a:hover{
+  color : #bfbfbf;
+}
 .nav-items:hover, .nav-link:hover{
   cursor: pointer;
 }
@@ -121,6 +124,10 @@
 	    -ms-flex-preferred-size: auto;
 	    flex-basis: auto;
 	}
+}
+
+.navbar-toggler:focus{
+  box-shadow: none;
 }
 
 

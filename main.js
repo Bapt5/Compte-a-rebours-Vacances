@@ -114,16 +114,20 @@ function test() {
 		$("#myModal").css("display", "none");
 		$('#week').click();
 	});
+	$(document).ready(function() {
+		setTimeout(function() { test(); });
+	});
 	$(window).on("click", function(event) {
 		if (event.target.id == "myModal") {
 			$("#myModal").css("display", "none");
 			$('#week').click();
 		}
 	});
-	$(".navbar-toggle").on("click", function() {
-		console.log('yes');
+	$(".navbar-toggler").click(function() {
 		$(".navbar-collapse").slideToggle(300);
+		setTimeout(function() { test(); });
 	});
+
 }
 $(document).ready(function() {
 	setTimeout(function() { test(); });
