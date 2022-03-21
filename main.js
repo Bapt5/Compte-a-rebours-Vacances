@@ -118,10 +118,10 @@ function test() {
 		$(".navbar-collapse").slideToggle(300);
 		setTimeout(function() { test(); });
 	});
-	// $(".navbar-toggle").on("click", function() {
-	// 	console.log('yes');
-	// 	$(".navbar-collapse").slideToggle(300);
-	// });
+	$(".navbar-toggle").on("click", function() {
+		console.log('yes');
+		$(".navbar-collapse").slideToggle(300);
+	});
 	$(".close").on("click", function() {
 		$("#myModal").css("display", "none");
 		$('#week').click();
