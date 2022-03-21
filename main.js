@@ -85,6 +85,7 @@ function test() {
 		}
 		else {
 			unit = this.id;
+			console.log('1');
 			$(".navbar-collapse").slideToggle(300);
 		}
 		$('#navbarSupportedContent ul li').removeClass("active");
@@ -115,7 +116,7 @@ function test() {
 		setTimeout(function() { test(); }, 500);
 	});
 	$(".navbar-toggler").click(function() {
-		console.log('yes');
+		console.log('2');
 		$(".navbar-collapse").slideToggle(300);
 		setTimeout(function() { test(); });
 	});
