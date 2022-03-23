@@ -63,6 +63,7 @@ function toRadians(val) {
 
 
 function test() {
+	console.log('test');
 	var tabsNewAnim = $('#navbarSupportedContent');
 	var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
 	var activeItemNewAnim = tabsNewAnim.find('.active');
