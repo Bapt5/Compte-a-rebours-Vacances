@@ -86,8 +86,6 @@ function test() {
 		}
 		else {
 			unit = this.id;
-			setTimeout(function() { test(); }, 1000);
-			$(".navbar-collapse").slideToggle(300);
 		}
 		$('#navbarSupportedContent ul li').removeClass("active");
 		$(this).addClass('active');
