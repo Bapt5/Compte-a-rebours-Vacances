@@ -115,6 +115,7 @@ function test() {
 		setTimeout(function() { test(); }, 500);
 	});
 	$(".navbar-toggler").click(function() {
+		console.log('click')
 		$(".navbar-collapse").slideToggle(300);
 		setTimeout(function() { test(); });
 	});
