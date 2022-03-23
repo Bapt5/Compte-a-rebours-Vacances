@@ -115,14 +115,9 @@ function test() {
 		setTimeout(function() { test(); }, 500);
 	});
 	$(".navbar-toggler").click(function() {
-		// console.log('2');
 		$(".navbar-collapse").slideToggle(300);
-		setTimeout(function() { test(); }, 1000);
+		setTimeout(function() { test(); });
 	});
-	// $(".navbar-toggle").on("click", function() {
-	// 	console.log('yes');
-	// 	$(".navbar-collapse").slideToggle(300);
-	// });
 	$(".close").on("click", function() {
 		$("#myModal").css("display", "none");
 		$('#week').click();
