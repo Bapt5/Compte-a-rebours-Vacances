@@ -93,6 +93,7 @@ function test() {
 		var activeWidthNewAnimWidth = $(this).innerWidth();
 		var itemPosNewAnimTop = $(this).position();
 		var itemPosNewAnimLeft = $(this).position();
+		$(".navbar-collapse").delay(500).slideUp(300);
 		$(".hori-selector").css({
 			"top": itemPosNewAnimTop.top + "px",
 			"left": itemPosNewAnimLeft.left + "px",
