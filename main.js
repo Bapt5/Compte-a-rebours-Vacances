@@ -63,7 +63,6 @@ function toRadians(val) {
 
 
 function test() {
-	console.log('test');
 	var tabsNewAnim = $('#navbarSupportedContent');
 	var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
 	var activeItemNewAnim = tabsNewAnim.find('.active');
@@ -116,7 +115,6 @@ function test() {
 		setTimeout(function() { test(); }, 500);
 	});
 	$(".navbar-toggler").on("click", function() {
-		console.log('click')
 		$(".navbar-collapse").slideToggle(300);
 		setTimeout(function() { test(); });
 	});
@@ -131,9 +129,7 @@ function test() {
 		}
 	});
 }
-$(document).ready(function() {
-	setTimeout(function() { test(); });
-});
+
 
 
 
