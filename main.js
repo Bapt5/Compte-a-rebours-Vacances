@@ -126,7 +126,7 @@ $(".close").on("click", function() {
 	$('#week').click();
 });
 $(window).on("click", function(event) {
-	console.log(event.target.id);
+	console.log(event.target);
 	if (event.target.id == "myModal") {
 		$("#myModal").css("display", "none");
 		$('#week').click();
