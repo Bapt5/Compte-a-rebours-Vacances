@@ -114,24 +114,24 @@ $(".close").on("click", function() {
 	$("#myModal").css("display", "none");
 	$('#week').click();
 });
-$(window).on("click", function(event) {
-	console.log(event.target.id);
-	if (event.target.id == "myModal") {
-		$("#myModal").css("display", "none");
-		$('#week').click();
-	}
-	if (event.target.id == "submit") {
-		zone = $('#zone-select').val();
-		vacDay = $('#dayVac-select').val();
-		heurVac = $('#time-Vac').val();
-		localStorage.setItem('zone', zone);
-		localStorage.setItem('vacDay', vacDay);
-		localStorage.setItem('heurVac', heurVac);
-		dateVacance();
-		$("#myModal").css("display", "none");
-		$('#week').click();
-	}
-});
+// $(window).on("click", function(event) {
+// 	console.log(event.target.id);
+// 	if (event.target.id == "myModal") {
+// 		$("#myModal").css("display", "none");
+// 		$('#week').click();
+// 	}
+// 	if (event.target.id == "submit") {
+// 		zone = $('#zone-select').val();
+// 		vacDay = $('#dayVac-select').val();
+// 		heurVac = $('#time-Vac').val();
+// 		localStorage.setItem('zone', zone);
+// 		localStorage.setItem('vacDay', vacDay);
+// 		localStorage.setItem('heurVac', heurVac);
+// 		dateVacance();
+// 		$("#myModal").css("display", "none");
+// 		$('#week').click();
+// 	}
+// });
 
 
 
