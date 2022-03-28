@@ -100,36 +100,35 @@ function test() {
 			"width": activeWidthNewAnimWidth + "px"
 		});
 	});
-	$('#submit').on("click", function() {
-		zone = $('#zone-select').val();
-		vacDay = $('#dayVac-select').val();
-		heurVac = $('#time-Vac').val();
-		localStorage.setItem('zone', zone);
-		localStorage.setItem('vacDay', vacDay);
-		localStorage.setItem('heurVac', heurVac);
-		dateVacance();
-		$("#myModal").css("display", "none");
-		$('#week').click();
-	});
-	$(window).on('resize', function() {
-		setTimeout(function() { test(); }, 500);
-	});
-	$(".navbar-toggler").on("click", function() {
-		$(".navbar-collapse").slideToggle(300);
-		setTimeout(function() { test(); });
-	});
-	$(".close").on("click", function() {
-		$("#myModal").css("display", "none");
-		$('#week').click();
-	});
-	$(window).on("click", function(event) {
-		if (event.target.id == "myModal") {
-			$("#myModal").css("display", "none");
-			$('#week').click();
-		}
-	});
 }
-
+$('#submit').on("click", function() {
+	zone = $('#zone-select').val();
+	vacDay = $('#dayVac-select').val();
+	heurVac = $('#time-Vac').val();
+	localStorage.setItem('zone', zone);
+	localStorage.setItem('vacDay', vacDay);
+	localStorage.setItem('heurVac', heurVac);
+	dateVacance();
+	$("#myModal").css("display", "none");
+	$('#week').click();
+});
+$(window).on('resize', function() {
+	setTimeout(function() { test(); }, 500);
+});
+$(".navbar-toggler").on("click", function() {
+	$(".navbar-collapse").slideToggle(300);
+	setTimeout(function() { test(); });
+});
+$(".close").on("click", function() {
+	$("#myModal").css("display", "none");
+	$('#week').click();
+});
+$(window).on("click", function(event) {
+	if (event.target.id == "myModal") {
+		$("#myModal").css("display", "none");
+		$('#week').click();
+	}
+});
 
 
 
@@ -158,10 +157,6 @@ jQuery(document).ready(function($) {
 	} else {
 		console.log("Browser doesn't support geolocation!");
 	}
-
-	var target = $('#navbarSupportedContent ul li a[href="' + path + '"]');
-	// Add active class to target link
-	target.parent().addClass('active');
 });
 
 
