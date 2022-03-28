@@ -103,6 +103,17 @@ function test() {
 		});
 	});
 }
+$('#submit').on("click", function() {
+	zone = $('#zone-select').val();
+	vacDay = $('#dayVac-select').val();
+	heurVac = $('#time-Vac').val();
+	localStorage.setItem('zone', zone);
+	localStorage.setItem('vacDay', vacDay);
+	localStorage.setItem('heurVac', heurVac);
+	dateVacance();
+	$("#myModal").css("display", "none");
+	$('#week').click();
+});
 $(window).on('resize', function() {
 	setTimeout(function() { test(); }, 500);
 });
@@ -115,11 +126,11 @@ $(".close").on("click", function() {
 	$('#week').click();
 });
 $(window).on("click", function(event) {
+	console.log(event.target.id);
 	if (event.target.id == "myModal") {
 		$("#myModal").css("display", "none");
 		$('#week').click();
 	}
-
 });
 
 
