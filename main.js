@@ -16,7 +16,7 @@ var keyzone = Object.keys(departZone);
 function findCity(userLatitude, userLongitude) {
 	var longitude = userLongitude;
 	var latitude = userLatitude;
-	var promis = fetch("data.json")
+	var promis = fetch("departements.json")
 		.then(response => {
 			return response.json();
 		})
