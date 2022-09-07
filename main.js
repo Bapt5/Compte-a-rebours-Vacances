@@ -182,7 +182,7 @@ var premierCercleWeek = 0;
 var deuxiemeCercleWeek = 0;
 
 var now;
-var annee = '2021-2022'
+var annee = '2022-2023';
 var endpoint = ''.concat('https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-calendrier-scolaire&q=&facet=description&facet=start_date&facet=end_date&facet=location&facet=zones&facet=annee_scolaire&refine.zones=Zone+', zone, '&refine.annee_scolaire=', annee, '&refine.location=Versailles&timezone=Europe%2FParis');
 
 function dateVacance() {
